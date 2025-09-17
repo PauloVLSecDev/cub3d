@@ -18,7 +18,7 @@ int	extencion_map(char *filename)
 			&& (filename[i + 4] == '\0'))
 		{
 			valid = 1;
-			printf("extencaio map is valid\n");
+			printf("extencaio map is valid");
 		}
 		i++;
 	}

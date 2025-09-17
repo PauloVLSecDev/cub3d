@@ -21,6 +21,8 @@ int 	main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
+		if (!extencion_map(argv[1]))
+			printf("invalid extension\n");
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 			printf("%s invalid file \n", argv[1]);
@@ -29,7 +31,7 @@ int 	main(int argc, char *argv[])
 			if (valid_map(fd) == 1)
 				printf("valid\n");
 			else
-				printf("invald\n");
+				printf("invald  fd\n");
 			//init_cub3d(fd);
 		}
 	}

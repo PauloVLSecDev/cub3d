@@ -36,4 +36,7 @@ typedef struct s_image
 
 }	t_image;
 
+
+int	extencion_map(char *filename);
+
 #endif
