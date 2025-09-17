@@ -6,17 +6,63 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:05:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/09/11 19:24:43 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/09/17 20:28:36 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static int	valid_map(int map);
 
-int 	main(int argc, char *argv[])
+int	count_lines(char *path)
 {
-	printf("executando a main \n");
+	int	count_lines; 
+	char *line;
+
+	int map;
+
+	map = open(path, O_RDONLY);
+	
+	count_lines = 0;
+	line = get_next_line(map);
+	if (line != NULL)
+		count_lines++;
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(map);
+		count_lines++;
+	}
+	close(map);
+	return (count_lines);
+}
+
+t_parse_map	*storege_map(int	map, char	*path)
+{
+	char	*line;
+	int		i;
+	int		player;
+	t_parse_map	*data;
+
+	player = 0;
+	i = 0;
+	data = malloc(sizeof(t_parse_map));
+	data->num_lines = (count_lines(path) + 1);
+	data->map = (char **)malloc(sizeof(char *) * data->num_lines);
+	line = get_next_line(map);
+	while (line != NULL)
+	{
+		data->map[i] = ft_strdup(line);
+		free(line);
+		line = get_next_line(map);
+		i++;
+	}
+	return (data);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_parse_map	*data;
+
 	int	fd;
 
 	if (argc == 2)
@@ -28,11 +74,12 @@ int 	main(int argc, char *argv[])
 			printf("%s invalid file \n", argv[1]);
 		else 
 		{
-			if (valid_map(fd) == 1)
-				printf("valid\n");
-			else
-				printf("invald  fd\n");
-			//init_cub3d(fd);
+			data = storege_map(fd, argv[1]);
+			printf("%s\n", data->map[0]);
+			printf("%s\n", data->map[1]);
+			printf("%s\n", data->map[2]);
+			printf("%s\n", data->map[3]);
+			printf("%s\n", data->map[4]);
 		}
 	}
 	else
@@ -40,20 +87,4 @@ int 	main(int argc, char *argv[])
 	return (0);
 }
 
-static int	valid_map(int map)
-{
-	char 	*line;
-	int		player;
 
-	player = 0;
-	line  = get_next_line(map);
-	while (line != NULL)
-	{
-		if (ft_strncmp(line, "N", ft_strlen(line)) == 0)
-				player += 1;
-		printf("%d \n", player);
-		free(line);
-		line = get_next_line(map);
-	}
-	return (player);
-}

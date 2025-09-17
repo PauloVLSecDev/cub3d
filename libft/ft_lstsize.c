@@ -27,15 +27,17 @@ int	ft_lstsize(t_list *lst)
 /*
 int	main(void)
 {
-	t_list *lista;
-	t_list *zero;
-	t_list *um;
+	t_list	*lista;
+	t_list	*zero;
+	t_list	*um;
+	int		size;
+
 	zero = (t_list *)malloc(sizeof(t_list));
 	um = (t_list *)malloc(sizeof(t_list));
 	lista = (t_list *)malloc(sizeof(t_list));
 	lista->next = zero;
 	zero->next = um;
-	int	size = ft_lstsize(lista);
+	size = ft_lstsize(lista);
 	printf("\nquantidade de nos, %d\n", size);
 }
 */

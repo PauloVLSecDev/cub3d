@@ -39,9 +39,9 @@ static char	*extract_line(char **buffer)
 
 static char	*read_file(int fd, char **buffer)
 {
-	char		*line;
-	int			size_read;
-	char		*temp;
+	char	*line;
+	int		size_read;
+	char	*temp;
 
 	line = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!line)
@@ -50,8 +50,7 @@ static char	*read_file(int fd, char **buffer)
 	{
 		size_read = read(fd, line, BUFFER_SIZE);
 		if (size_read == -1)
-			return (free(*buffer), free(line),
-				*buffer = NULL, NULL);
+			return (free(*buffer), free(line), *buffer = NULL, NULL);
 		if (size_read == 0)
 			break ;
 		line[size_read] = '\0';
