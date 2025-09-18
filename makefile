@@ -6,7 +6,7 @@
 #    By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/15 01:01:06 by yurivieirad       #+#    #+#              #
-#    Updated: 2025/09/15 01:08:44 by yurivieirad      ###   ########.fr        #
+#    Updated: 2025/09/18 17:21:53 by yurivieirad      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,14 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx.a
-INCLUDES = includes
+INCLUDES = inc
 
 ENABLE_MLX = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
-FILES = $(SRC_DIR)/main.c
+FILES = $(SRC_DIR)/main.c \
+		$(SRC_DIR)/init.c \
+		$(SRC_DIR)/hooks.c \
+		$(SRC_DIR)/render.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(FILES))
 
@@ -48,6 +51,7 @@ $(NAME): $(LIBFT) $(MLX_LIB) $(OBJS)
 clean:
 	@rm -rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
+	@make -C $(MLX_DIR) clean
 
 fclean: clean
 	@rm -f $(NAME)
