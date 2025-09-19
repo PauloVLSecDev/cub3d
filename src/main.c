@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:05:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/09/17 20:28:36 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/09/18 16:54:35 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_parse_map	*storege_map(int	map, char	*path)
 	line = get_next_line(map);
 	while (line != NULL)
 	{
-		data->map[i] = ft_strdup(line);
+		data->map[i] = valid_line(ft_strdup(line));
 		free(line);
 		line = get_next_line(map);
 		i++;
@@ -75,11 +75,6 @@ int	main(int argc, char *argv[])
 		else 
 		{
 			data = storege_map(fd, argv[1]);
-			printf("%s\n", data->map[0]);
-			printf("%s\n", data->map[1]);
-			printf("%s\n", data->map[2]);
-			printf("%s\n", data->map[3]);
-			printf("%s\n", data->map[4]);
 		}
 	}
 	else
