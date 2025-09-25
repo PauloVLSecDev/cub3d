@@ -25,7 +25,8 @@ INCLUDES = includes
 ENABLE_MLX = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 FILES = $(SRC_DIR)/main.c \
-	$(SRC_DIR)/map.c
+	$(SRC_DIR)/utils.c \
+	$(SRC_DIR)/map.c \ 
 
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(FILES))
 

@@ -26,7 +26,7 @@ int	count_lines(char *path)
 	line = get_next_line(map);
 	if (line != NULL)
 		count_lines++;
-	while (line != NULL)
+	while (line != NULL && line == "\n")
 	{
 		free(line);
 		line = get_next_line(map);
