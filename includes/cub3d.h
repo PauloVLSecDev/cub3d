@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:10:23 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/01 17:21:04 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:49:27 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,25 @@ typedef struct s_parse_map
 	int num_lines;
 	int	wall;
 	int empyt;
-	char **Texture_SO;
-	char **Texture_NO;
-	char **Texture_WE;
-	char **Texture_EA;
+	char *Texture_SO;
+	char *Texture_NO;
+	char *Texture_WE;
+	char *Texture_EA;
 	int	W_texture;
 	int	F_rgb[3]; 
 	int	C_rgb[3]; 
-	int valid_colors;
-	int error_rgb;
+	int	map_start_line;
 	char **map;		
 	
 } 			t_parse_map;
 
 int			extencion_map(char *filename);
-int			num_player(char *line);
 bool 		line_is_empty(char *line);
 int			valid_line(char *line, t_parse_map **data);
-void	get_colors_F(char *line, t_parse_map **data);
-void	get_colors_C(char *line, t_parse_map **data);
-void	ft_iscompass_rose(char *line, t_parse_map **data); 
-t_parse_map			*stogere_map(int map);
-
+void		init_data(t_parse_map *data);
+void		parse_map_file(int fd, t_parse_map *data);
+int			all_configs_loaded(t_parse_map *data);
+void		parse_colors(char *rgb_str, int *color_array);
+void		parse_config_line(char *line, t_parse_map *data);
 #endif
 

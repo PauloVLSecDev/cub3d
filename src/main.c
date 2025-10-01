@@ -6,58 +6,11 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:05:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/01 17:08:05 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/01 20:25:01 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int	count_lines(char *path)
-{
-	int	count_lines; 
-	char *line;
-
-	int map;
-
-	map = open(path, O_RDONLY);
-	
-	count_lines = 0;
-	line = get_next_line(map);
-	while (line != NULL)
-	{
-		if (!line_is_empty(line))
-				count_lines++;
-		free(line);
-		line = get_next_line(map);
-	}
-	close(map);
-	return (count_lines);
-}
-
-t_parse_map	*storege_map(int	map, char	*path)
-{
-	char	*line;
-	int		i;
-	int		player;
-	t_parse_map	**data;
-
-	player = 0;
-	i = 0;
-	data = malloc(sizeof(t_parse_map));
-	(*data)->num_lines = (count_lines(path) + 1);
-	printf("%i numeros de linhas do arquivo \n", (*data)->num_lines);
-	(*data)->map = (char **)malloc(sizeof(char *) * (*data)->num_lines);
-	line = get_next_line(map);
-	while (line != NULL)
-	{
-		if (valid_line(line, data))
-			(*data)->map[i] = ft_strdup(line);
-		free(line);
-		line = get_next_line(map);
-		i++;
-	}
-	return (*data);
-}
 
 bool	line_is_empty(char *line)
 {
@@ -73,22 +26,74 @@ bool	line_is_empty(char *line)
 	return (true);
 }
 
+void init_data(t_parse_map *data)
+{
+	data->num_lines = 0;
+	data->Texture_NO = NULL;
+	data->Texture_SO = NULL;
+	data->Texture_WE = NULL;
+	data->Texture_EA = NULL;
+	data->F_rgb[0] = -1; 
+	data->C_rgb[0] = -1;
+	data->map_start_line = -1;
+	data->map = NULL;
+
+}
+
+void	parse_map_file(int fd, t_parse_map *data)
+{
+	char	*line;
+	int		line_num;
+
+	line_num = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		line_num++;
+		if (line_is_empty(line))
+		{
+			free(line);
+			line = get_next_line(fd);
+			continue ;
+		}
+		if (!all_configs_loaded(data))
+			parse_config_line(line, data);
+		else
+		{
+			if (data->map_start_line == -1)
+				data->map_start_line = line_num;
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (!all_configs_loaded(data))
+		printf("Error: map\n");
+}
+
 int	main(int argc, char *argv[])
 {
-	t_parse_map	**data;
+	t_parse_map	*data;
 	int	fd;
 
-	data = NULL;
+	data = malloc(sizeof(t_parse_map));
 	if (argc == 2)
 	{
 		if (!extencion_map(argv[1]))
-			printf("invalid extension\n");
+				printf("invalid extension");
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 			printf("%s invalid file \n", argv[1]);
 		else 
 		{
-			*(data) = storege_map(fd, argv[1]);
+			init_data(data);
+			parse_map_file(fd, data);
+			printf("%i textura valida \n", data->W_texture); 
+			printf("%s textura NO \n", data->Texture_NO); 
+			printf("%s textura SO \n", data->Texture_SO); 
+			printf("%s textura WE \n", data->Texture_WE); 
+			printf("%s textura EA \n", data->Texture_EA); 
+			printf("teto R %i G %i B %i \n", data->C_rgb[0], data->C_rgb[1], data->C_rgb[2]); 
+			printf("chao R %i G %i B %i \n", data->F_rgb[0], data->F_rgb[1], data->F_rgb[2]); 
 		}
 	}
 	else

@@ -6,102 +6,77 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:06 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/01 17:36:43 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:41:34 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static int invalid_rgb(char **colors);
-
-int valid_line(char *line, t_parse_map **data)
+int	all_configs_loaded(t_parse_map *data)
 {
-	while (*line)
-	{
-		while (*line == '\t' || *line == ' ') 
-				line++;
-		get_colors_F(line, data);
-		get_colors_C(line, data);
-		ft_iscompass_rose(line, data);
-		if (line_is_empty(line))
-				return (0);
-		line++;
-	}
-	return (1);
-}
-
-void	get_colors_F(char *line, t_parse_map **data)
-{
-	char **colors;
-
-	colors = NULL;
-	if (ft_strncmp(line, "F", 1) == 0)
-	{
-		colors = ft_split(line, ',');
-		if (ft_atoi(colors[0]) >= 0 && ft_atoi(colors[0]) <= 255) 
-			(*data)->F_rgb[0] = ft_atoi(colors[0]);
-		else
-			(*data)->error_rgb = invalid_rgb(colors);
-		if (ft_atoi(colors[1]) >= 0 && ft_atoi(colors[1]) <= 255)
-			(*data)->F_rgb[1] = ft_atoi(colors[1]);
-		else
-			(*data)->error_rgb = invalid_rgb(colors);
-		if (ft_atoi(colors[2]) >= 0 && ft_atoi(colors[2]) <= 255)
-			(*data)->F_rgb[2] = ft_atoi(colors[2]);
-		else
-			(*data)->error_rgb = invalid_rgb(colors);
-	}
-}
-
-void	get_colors_C(char *line, t_parse_map **data)
-{
-	char **colors;
-
-	colors = NULL;
-
-	if (ft_strncmp(line, "C", 1) == 0)
-	{
-		colors = ft_split(line, ',');
-		if (ft_atoi(colors[0]) >= 0 && ft_atoi(colors[0]) <= 255) 
-			(*data)->C_rgb[0] = ft_atoi(colors[0]);
-		else
-			(*data)->error_rgb = invalid_rgb(colors);
-		if (ft_atoi(colors[1]) >= 0 && ft_atoi(colors[1]) <= 255)
-			(*data)->C_rgb[1] = ft_atoi(colors[1]);
-		else
-			(*data)->error_rgb = invalid_rgb(colors);
-		if (ft_atoi(colors[2]) >= 0 && ft_atoi(colors[2]) <= 255)
-			(*data)->C_rgb[2] = ft_atoi(colors[2]);
-		else
-			(*data)->error_rgb = invalid_rgb(colors);
-	}
-	else 
-		(*data)->error_rgb = invalid_rgb(colors);
-}
-
-static int invalid_rgb(char **colors)
-{
-	if (colors != NULL)
-	{
-		free_array(colors);
-		printf("invalid color");
+	if (data->Texture_NO && data->Texture_SO && data->Texture_WE
+		&& data->Texture_EA && data->F_rgb[0] != -1 && data->C_rgb[0] != -1)
 		return (1);
-	}
-	return (1);
+	return (0);
 }
 
-void	ft_iscompass_rose(char *line, t_parse_map **data)
+void	parse_config_line(char *line, t_parse_map *data)
 {
-	(*data)->W_texture = 0;
-	if (ft_strncmp(line, "SO", 2) == 0 && (*data)->W_texture != 1)
-		(*data)->Texture_SO = ft_split(line, ' ');
-	else if (ft_strncmp(line, "NO", 2) == 0 && (*data)->W_texture != 1)
-		(*data)->Texture_NO = ft_split(line, ' ');
-	else if (ft_strncmp(line, "WE", 2) == 0 && (*data)->W_texture != 1) 
-		(*data)->Texture_WE = ft_split(line, ' ');
-	else 	if (ft_strncmp(line, "EA", 2) == 0 && (*data)->W_texture != 1)
-		(*data)->Texture_EA = ft_split(line, ' ');
-	else 
-		(*data)->W_texture = 1;
+	char	**tokens;
+
+	tokens = ft_split(line, ' ');
+	if (!tokens || !tokens[0])
+	{
+		if (tokens)
+			free_array(tokens);
+		return;
+	}
+
+	if (ft_strncmp(tokens[0], "NO", 3) == 0 && !data->Texture_NO)
+		data->Texture_NO = ft_strdup(tokens[1]);
+	else if (ft_strncmp(tokens[0], "SO", 3) == 0 && !data->Texture_SO)
+		data->Texture_SO = ft_strdup(tokens[1]);
+	else if (ft_strncmp(tokens[0], "WE", 3) == 0 && !data->Texture_WE)
+		data->Texture_WE = ft_strdup(tokens[1]);
+	else if (ft_strncmp(tokens[0], "EA", 3) == 0 && !data->Texture_EA)
+		data->Texture_EA = ft_strdup(tokens[1]);
+	else if (ft_strncmp(tokens[0], "F", 2) == 0 && data->F_rgb[0] == -1)
+		parse_colors(tokens[1], data->F_rgb);
+	else if (ft_strncmp(tokens[0], "C", 2) == 0 && data->C_rgb[0] == -1)
+		parse_colors(tokens[1], data->C_rgb);
+	else
+	{
+		if(!all_configs_loaded(data))
+			printf("Erro: Linha de configuração inválida: %s\n", line);
+	}
+	free_array(tokens);
 }
 
+void	parse_colors(char *rgb_str, int *color_array)
+{
+	char	**rgb_val;
+	int		i;
+
+	rgb_val = ft_split(rgb_str, ',');
+	if (!rgb_val || !rgb_val[0] || !rgb_val[1] || !rgb_val[2] || rgb_val[3])
+	{
+		printf("Erro: Formato de cor RGB inválido.\n");
+		if (rgb_val)
+			free_array(rgb_val);
+		return;
+	}
+
+	i = 0;
+	while (i < 3)
+	{
+		color_array[i] = ft_atoi(rgb_val[i]);
+		if (color_array[i] < 0 || color_array[i] > 255)
+		{
+			printf("Error: color value valid is 0-255.\n");
+			color_array[0] = -1;
+			break;
+		}
+		i++;
+	}
+	free_array(rgb_val);
+}
