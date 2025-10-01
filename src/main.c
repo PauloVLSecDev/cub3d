@@ -6,12 +6,11 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:05:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/09/18 16:54:35 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:08:05 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
 
 int	count_lines(char *path)
 {
@@ -24,13 +23,12 @@ int	count_lines(char *path)
 	
 	count_lines = 0;
 	line = get_next_line(map);
-	if (line != NULL)
-		count_lines++;
-	while (line != NULL && line == "\n")
+	while (line != NULL)
 	{
+		if (!line_is_empty(line))
+				count_lines++;
 		free(line);
 		line = get_next_line(map);
-		count_lines++;
 	}
 	close(map);
 	return (count_lines);
@@ -41,30 +39,46 @@ t_parse_map	*storege_map(int	map, char	*path)
 	char	*line;
 	int		i;
 	int		player;
-	t_parse_map	*data;
+	t_parse_map	**data;
 
 	player = 0;
 	i = 0;
 	data = malloc(sizeof(t_parse_map));
-	data->num_lines = (count_lines(path) + 1);
-	data->map = (char **)malloc(sizeof(char *) * data->num_lines);
+	(*data)->num_lines = (count_lines(path) + 1);
+	printf("%i numeros de linhas do arquivo \n", (*data)->num_lines);
+	(*data)->map = (char **)malloc(sizeof(char *) * (*data)->num_lines);
 	line = get_next_line(map);
 	while (line != NULL)
 	{
-		data->map[i] = valid_line(ft_strdup(line));
+		if (valid_line(line, data))
+			(*data)->map[i] = ft_strdup(line);
 		free(line);
 		line = get_next_line(map);
 		i++;
 	}
-	return (data);
+	return (*data);
+}
+
+bool	line_is_empty(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] != '\0') 
+	{
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_parse_map	*data;
-
+	t_parse_map	**data;
 	int	fd;
 
+	data = NULL;
 	if (argc == 2)
 	{
 		if (!extencion_map(argv[1]))
@@ -74,7 +88,7 @@ int	main(int argc, char *argv[])
 			printf("%s invalid file \n", argv[1]);
 		else 
 		{
-			data = storege_map(fd, argv[1]);
+			*(data) = storege_map(fd, argv[1]);
 		}
 	}
 	else

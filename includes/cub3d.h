@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:10:23 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/09/18 18:09:55 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:21:04 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "keycaps.h"
 # include "../libft/libft.h"
 # include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -44,13 +45,20 @@ typedef struct s_parse_map
 	int	W_texture;
 	int	F_rgb[3]; 
 	int	C_rgb[3]; 
-	int valid_colors
+	int valid_colors;
+	int error_rgb;
 	char **map;		
 	
 } 			t_parse_map;
 
 int			extencion_map(char *filename);
 int			num_player(char *line);
+bool 		line_is_empty(char *line);
+int			valid_line(char *line, t_parse_map **data);
+void	get_colors_F(char *line, t_parse_map **data);
+void	get_colors_C(char *line, t_parse_map **data);
+void	ft_iscompass_rose(char *line, t_parse_map **data); 
 t_parse_map			*stogere_map(int map);
 
 #endif
+
