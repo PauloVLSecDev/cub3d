@@ -6,7 +6,7 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:21:17 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/09/18 21:26:52 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/01 19:31:29 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,39 @@ int	exit_program(t_game *game)
 	exit(0);
 }
 
-int	key_press(int keycode, t_player *player)
+int	key_press(int keycode, t_game *game)
 {
 	if (keycode == W)
-		player->key_up = true;
+		game->player.key_up = true;
 	if (keycode == S)
-		player->key_down = true;
+		game->player.key_down = true;
 	if (keycode == A)
-		player->key_left = true;
+		game->player.key_left = true;
 	if (keycode == D)
-		player->key_right = true;
+		game->player.key_right = true;
 	if (keycode == ARROW_LEFT)
-		player->left_rotate = true;
+		game->player.left_rotate = true;
 	if (keycode == ARROW_RIGHT)
-		player->right_rotate = true;
+		game->player.right_rotate = true;
 	if (keycode == ESC)
-		exit_program((t_game *)player);
+		exit_program(game);
 	return (0);
 }
 
-int	key_release(int keycode, t_player *player)
+int	key_release(int keycode, t_game *game)
 {
 	if (keycode == W)
-		player->key_up = false;
+		game->player.key_up = false;
 	if (keycode == S)
-		player->key_down = false;
+		game->player.key_down = false;
 	if (keycode == A)
-		player->key_left = false;
+		game->player.key_left = false;
 	if (keycode == D)
-		player->key_right = false;
+		game->player.key_right = false;
 	if (keycode == ARROW_LEFT)
-		player->left_rotate = false;
+		game->player.left_rotate = false;
 	if (keycode == ARROW_RIGHT)
-		player->right_rotate = false;
+		game->player.right_rotate = false;
 	return (0);
 }
 
@@ -59,6 +59,8 @@ void	move_player(t_player *player, char **map)
 	float	angle_speed = 0.05;
 	float	new_x;
 	float	new_y;
+	float	cos_angle;
+	float	sin_angle;
 
 	if (player->left_rotate)
 		player->angle -= angle_speed;
@@ -68,8 +70,8 @@ void	move_player(t_player *player, char **map)
 		player->angle -= 2 * PI;
 	if (player->angle < 0)
 		player->angle += 2 * PI;
-	float cos_angle = cos(player->angle) * MOVE_SPEED;
-	float sin_angle = sin(player->angle) * MOVE_SPEED;
+	cos_angle = cos(player->angle) * MOVE_SPEED;
+	sin_angle = sin(player->angle) * MOVE_SPEED;
 	new_x = player->x;
 	new_y = player->y;
 	if (player->key_up)

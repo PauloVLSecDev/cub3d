@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 01:03:24 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/09/18 20:43:18 by yurivieirad      ###   ########.fr       */
-/*                                                                            */
+/* */
+/* :::      ::::::::   */
+/* cub3d.h                                            :+:      :+:    :+:   */
+/* +:+ +:+         +:+     */
+/* By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/* +#+#+#+#+#+   +#+           */
+/* Created: 2025/09/15 01:03:24 by yurivieirad       #+#    #+#             */
+/* Updated: 2025/09/23 19:30:06 by yurivieirad      ###   ########.fr       */
+/* */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
@@ -23,6 +23,7 @@
 
 # define WIN_WIDTH 960
 # define WIN_HEIGHT 640
+//usar delta time para pegar tempo de frame de cada PC
 # define MOVE_SPEED 3
 # define BLOCK_SIZE 64
 # define PLAYER_SIZE 8
@@ -41,6 +42,40 @@ typedef struct s_player
 	bool	right_rotate;
 }	t_player;
 
+typedef struct s_tex
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		width;
+	int		height;
+}	t_tex;
+
+typedef struct s_ray
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	double	wall_x;
+	int		tex_x;
+}	t_ray;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -52,6 +87,9 @@ typedef struct s_game
 	int			endian;
 	t_player	player;
 	char		**map;
+	int			floor_color;
+	int			ceiling_color;
+	t_tex		textures[4];
 }	t_game;
 
 // --- Protótipos de Funções ---
@@ -62,8 +100,8 @@ void	init_player(t_player *player);
 char	**get_map(void);
 
 // hooks.c
-int		key_press(int keycode, t_player *player);
-int		key_release(int keycode, t_player *player);
+int		key_press(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
 void	move_player(t_player *player, char **map);
 int		exit_program(t_game *game);
 
@@ -73,5 +111,9 @@ void	clear_image(t_game *game);
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
 int		render_loop(t_game *game);
+void	raycasting(t_game *game);
+void	draw_minimap(t_game *game);
+void	draw_player_minimap(t_game *game);
+void	draw_filled_square(int x, int y, int size, int color, t_game *game);
 
 #endif
