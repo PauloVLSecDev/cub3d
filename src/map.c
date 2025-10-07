@@ -1,69 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   floodfill.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/17 15:23:55 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/09/17 18:49:42 by pvitor-l         ###   ########.fr       */
+/*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
+/*   Updated: 2025/10/07 17:40:44 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	extencion_map(char *filename)
+void	valid_map(t_parse_map *data, char *first_line, int fd)
 {
-	int	i;
-	int	valid;
+	int y;	
+	int size_map;
+	char *current_line;
 
-	i = 0;
-	valid = 0;
-	if (filename[i] == '.')
-		return (valid);
-	while (filename[i] != '\0' && valid == 0)
+	y = 0;
+	size_map = 1;
+
+	printf("debug: %s \n", first_line);
+	current_line = first_line;
+	while (current_line)
 	{
-		if ((filename[i] == '.' && filename[i + 1] == 'c') && (filename[i
-				+ 2] == 'u' && filename[i + 3] == 'b') && (filename[i
-				+ 4] == '\0'))
-		{
-			valid += 1;
-			printf("extencaio map is valid\n");
-		}
-		i++;
+			if (line_is_empty(current_line))
+			{
+				free(current_line);		
+				current_line = get_next_line(fd);
+					continue ;
+			}
+			printf("debug: %s \n", current_line);
+			free(current_line);
+			current_line = get_next_line(fd);
+			size_map++;
 	}
-	return (valid);
+	data->map = malloc(sizeof(char *) * size_map);
+	printf("debug: o mapa tem %i linhas \n", size_map);
 }
-
-int	num_player(char *line)
-{
-	int i;
-	int count_player;
-
-	i = 0;
-	count_player = 0;
-	while (line[i] || line[i] != '\n')
-	{
-		if (!ft_isalpha(line[i]) && line[i + 1] == P_SOUTH
-				&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
-		else if (!ft_isalpha(line[i]) && line[i + 1] == P_NORTH
-			&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
-		else if (!ft_isalpha(line[i]) && line[i + 1] == P_WEST
-			&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
-		else if (!ft_isalpha(line[i]) && line[i + 1] == P_EASTH
-			&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
-		else
-			i++;
-	}
-	return (count_player);
-}
-
-
-
-
-
-

@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:05:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/01 20:25:01 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/07 15:36:00 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	parse_map_file(int fd, t_parse_map *data)
 		else
 		{
 			if (data->map_start_line == -1)
+			{
 				data->map_start_line = line_num;
+				valid_map(data, line, fd);
+			}
 		}
 		free(line);
 		line = get_next_line(fd);
@@ -88,6 +91,7 @@ int	main(int argc, char *argv[])
 			init_data(data);
 			parse_map_file(fd, data);
 			printf("%i textura valida \n", data->W_texture); 
+			printf("linha onde o map comeca %i \n", data->map_start_line); 
 			printf("%s textura NO \n", data->Texture_NO); 
 			printf("%s textura SO \n", data->Texture_SO); 
 			printf("%s textura WE \n", data->Texture_WE); 

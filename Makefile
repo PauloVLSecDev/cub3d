@@ -6,7 +6,7 @@
 #    By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/04 16:57:47 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/10/01 17:37:13 by pvitor-l         ###   ########.fr        #
+#    Updated: 2025/10/07 15:12:01 by pvitor-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ ENABLE_MLX = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 FILES = $(SRC_DIR)/main.c \
 	$(SRC_DIR)/utils.c \
+	$(SRC_DIR)/floodfill.c \
 	$(SRC_DIR)/map.c 
 
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(FILES))

@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:10:23 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/01 19:49:27 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:21:20 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void		parse_map_file(int fd, t_parse_map *data);
 int			all_configs_loaded(t_parse_map *data);
 void		parse_colors(char *rgb_str, int *color_array);
 void		parse_config_line(char *line, t_parse_map *data);
+void		valid_map(t_parse_map *data, char *first_line, int fd);
 #endif
 
