@@ -6,7 +6,7 @@
 #    By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/15 01:01:06 by yurivieirad       #+#    #+#              #
-#    Updated: 2025/09/18 17:21:53 by yurivieirad      ###   ########.fr        #
+#    Updated: 2025/10/09 18:55:00 by yurivieirad      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,9 @@ ENABLE_MLX = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/init.c \
 		$(SRC_DIR)/hooks.c \
+		$(SRC_DIR)/parse_textures.c \
+		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/map.c \
 		$(SRC_DIR)/render.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(FILES))

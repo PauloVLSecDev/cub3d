@@ -21,13 +21,38 @@
 # include <math.h>
 # include <stdbool.h>
 
-# define WIN_WIDTH 960
-# define WIN_HEIGHT 640
-//usar delta time para pegar tempo de frame de cada PC
+# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1920
+
 # define MOVE_SPEED 3
 # define BLOCK_SIZE 64
 # define PLAYER_SIZE 8
 # define PI 3.14159265359
+
+typedef struct s_image
+{
+	char	**matriz;
+	void	*img;
+	char	*addr;
+
+}			t_image;
+
+typedef struct s_parse_map
+{
+	int num_lines;
+	int	wall;
+	int empyt;
+	char *Texture_SO;
+	char *Texture_NO;
+	char *Texture_WE;
+	char *Texture_EA;
+	int	W_texture;
+	int	F_rgb[3];
+	int	C_rgb[3];
+	int	map_start_line;
+	char **map;
+
+} 			t_parse_map;
 
 typedef struct s_player
 {
@@ -98,6 +123,7 @@ typedef struct s_game
 void	init_game(t_game *game);
 void	init_player(t_player *player);
 char	**get_map(void);
+int		init_win(void);
 
 // hooks.c
 int		key_press(int keycode, t_game *game);
@@ -116,4 +142,14 @@ void	draw_minimap(t_game *game);
 void	draw_player_minimap(t_game *game);
 void	draw_filled_square(int x, int y, int size, int color, t_game *game);
 
+//	parse
+int			extencion_map(char *filename);
+bool 		line_is_empty(char *line);
+int			valid_line(char *line, t_parse_map **data);
+void		init_data(t_parse_map *data);
+void		parse_map_file(int fd, t_parse_map *data);
+int			all_configs_loaded(t_parse_map *data);
+void		parse_colors(char *rgb_str, int *color_array);
+void		parse_config_line(char *line, t_parse_map *data);
+void		valid_map(t_parse_map *data, char *first_line, int fd);
 #endif

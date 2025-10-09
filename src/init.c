@@ -31,11 +31,11 @@ char	**get_map(void)
 
 	map = malloc(sizeof(char *) * 11);
 	map[0] = "111111111111111";
-	map[1] = "100010000000001";
+	map[1] = "100010000010001";
 	map[2] = "100000000000001";
 	map[3] = "100000100000001";
 	map[4] = "100000000000001";
-	map[5] = "100000010000001";
+	map[5] = "100000000000001";
 	map[6] = "100001000000001";
 	map[7] = "100000000000101";
 	map[8] = "100000000000001";
@@ -79,4 +79,17 @@ void	init_game(t_game *game)
 	game->floor_color = 0x404040;
 	game->ceiling_color = 0x87CEEB;
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+}
+
+int	init_win(void)
+{
+	t_game	game;
+
+	init_game(&game);
+	mlx_hook(game.win, 2, 1L << 0, key_press, &game);
+	mlx_hook(game.win, 3, 1L << 1, key_release, &game);
+	mlx_hook(game.win, 17, 0, exit_program, &game);
+	mlx_loop_hook(game.mlx, render_loop, &game);
+	mlx_loop(game.mlx);
+	return (0);
 }
