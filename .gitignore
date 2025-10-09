@@ -50,13 +50,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-# debug vscode .vscode
-.vscode
-
-# temporatu files vim and Nvim  
-
-*.swp
-*.sw0
 
 # debug information files
 *.dwo
