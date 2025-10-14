@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 13:20:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/03/05 16:27:10 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/14 16:21:39 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ int					ft_put_unsi(unsigned int n);
 int					ft_hex(unsigned long hexa, char c);
 int					ft_pnt(unsigned long point);
 
+/*
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-
+*/
 #endif

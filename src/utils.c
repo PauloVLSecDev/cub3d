@@ -6,11 +6,11 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:06 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/01 19:41:34 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/14 17:18:34 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../inc/cub3d.h"
 
 int	all_configs_loaded(t_parse_map *data)
 {
@@ -41,9 +41,9 @@ void	parse_config_line(char *line, t_parse_map *data)
 	else if (ft_strncmp(tokens[0], "EA", 3) == 0 && !data->Texture_EA)
 		data->Texture_EA = ft_strdup(tokens[1]);
 	else if (ft_strncmp(tokens[0], "F", 2) == 0 && data->F_rgb[0] == -1)
-		parse_colors(tokens[1], data->F_rgb);
+		parse_colors_F(tokens[1], data);
 	else if (ft_strncmp(tokens[0], "C", 2) == 0 && data->C_rgb[0] == -1)
-		parse_colors(tokens[1], data->C_rgb);
+		parse_colors_C(tokens[1], data);
 	else
 	{
 		if(!all_configs_loaded(data))
@@ -52,7 +52,7 @@ void	parse_config_line(char *line, t_parse_map *data)
 	free_array(tokens);
 }
 
-void	parse_colors(char *rgb_str, int *color_array)
+void	parse_colors_C(char *rgb_str, t_parse_map *data)
 {
 	char	**rgb_val;
 	int		i;
@@ -65,15 +65,42 @@ void	parse_colors(char *rgb_str, int *color_array)
 			free_array(rgb_val);
 		return;
 	}
-
 	i = 0;
 	while (i < 3)
 	{
-		color_array[i] = ft_atoi(rgb_val[i]);
-		if (color_array[i] < 0 || color_array[i] > 255)
+		data->C_rgb[i] = ft_atoi(rgb_val[i]);
+		if (data->C_rgb[i] < 0 || data->C_rgb[i] > 255)
 		{
 			printf("Error: color value valid is 0-255.\n");
-			color_array[0] = -1;
+			data->C_rgb[0] = -1;
+			break;
+		}
+		i++;
+	}
+	free_array(rgb_val);
+}
+
+void	parse_colors_F(char *rgb_str, t_parse_map *data)
+{
+	char	**rgb_val;
+	int		i;
+
+	rgb_val = ft_split(rgb_str, ',');
+	if (!rgb_val || !rgb_val[0] || !rgb_val[1] || !rgb_val[2] || rgb_val[3])
+	{
+		printf("Erro: Formato de cor RGB inválido.\n");
+		if (rgb_val)
+			free_array(rgb_val);
+		return;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		data->F_rgb[i] = ft_atoi(rgb_val[i]);
+		if (data->F_rgb[i] < 0 || data->F_rgb[i] > 255)
+		{
+			printf("Error: color value valid is 0-255.\n");
+			data->F_rgb[0] = -1;
 			break;
 		}
 		i++;
