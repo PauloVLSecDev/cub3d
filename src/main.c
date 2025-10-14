@@ -6,7 +6,7 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 01:09:09 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/14 19:48:48 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/14 20:41:08 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	parse_map_file(int fd, t_parse_map *data)
 			{
 				data->map_start_line = line_num;
 					valid_map(data, line, fd);
+					return ;
 			}
 		}
 		free(line);
@@ -93,7 +94,6 @@ void	parse_map_file(int fd, t_parse_map *data)
 	if (!all_configs_loaded(data))
 		printf("Error: map\n");
 }
-
 
 int	main(int argc, char *argv[])
 {
@@ -113,7 +113,6 @@ int	main(int argc, char *argv[])
 			init_data(data);
 			parse_map_file(fd, data);
 		}
-		
 	}
 	else
 	{
