@@ -6,10 +6,9 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:49:56 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/01 19:49:57 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/15 21:38:31 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/cub3d.h"
 
@@ -45,13 +44,28 @@ void	draw_filled_square(int x, int y, int size, int color, t_game *game)
 
 void	init_ray(t_ray *ray, t_player *player, int x)
 {
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+
+	dir_x = cos(player->angle);
+	dir_y = sin(player->angle);
+	plane_x = -dir_y;
+	plane_y = dir_x;
 	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
-	ray->ray_dir_x = cos(player->angle) - sin(player->angle) * ray->camera_x;
-	ray->ray_dir_y = sin(player->angle) + cos(player->angle) * ray->camera_x;
-	ray->map_x = (int)player->x / BLOCK_SIZE;
-	ray->map_y = (int)player->y / BLOCK_SIZE;
-	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
-	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+	ray->ray_dir_x = dir_x + plane_x * FOV * ray->camera_x;
+	ray->ray_dir_y = dir_y + plane_y * FOV * ray->camera_x;
+	ray->map_x = (int)(player->x / BLOCK_SIZE);
+	ray->map_y = (int)(player->y / BLOCK_SIZE);
+	if (ray->ray_dir_x == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	if (ray->ray_dir_y == 0)
+		ray->delta_dist_y = 1e30;
+	else
+		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 	ray->hit = 0;
 }
 
@@ -99,8 +113,15 @@ void	perform_dda(t_ray *ray, t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (game->map[ray->map_y][ray->map_x] == '1')
+		if (ray->map_y < 0 || ray->map_y >= game->map_height || \
+			ray->map_x < 0 || ray->map_x >= game->map_width)
+		{
 			ray->hit = 1;
+		}
+		else if (game->map[ray->map_y][ray->map_x] == '1')
+		{
+			ray->hit = 1;
+		}
 	}
 }
 
@@ -108,7 +129,7 @@ void	draw_vertical_line(t_game *game, t_ray *ray, int x)
 {
 	int	y;
 	int	color;
-	int tex_y;
+	int	tex_y;
 
 	y = 0;
 	while (y < ray->draw_start)
@@ -201,7 +222,7 @@ void	draw_player_minimap(t_game *game)
 
 int	render_loop(t_game *game)
 {
-	move_player(&game->player, game->map);
+	move_player(&game->player, game->map_data.map);
 	raycasting(game);
 	draw_minimap(game);
 	draw_player_minimap(game);

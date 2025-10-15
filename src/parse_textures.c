@@ -13,8 +13,8 @@ int	extencion_map(char *filename)
 	while (filename[i] != '\0' && valid == 0)
 	{
 		if ((filename[i] == '.' && filename[i + 1] == 'c') && (filename[i
-				+ 2] == 'u' && filename[i + 3] == 'b') && (filename[i
-				+ 4] == '\0'))
+					+ 2] == 'u' && filename[i + 3] == 'b') && (filename[i
+					+ 4] == '\0'))
 		{
 			valid += 1;
 			printf("extencaio map is valid\n");
@@ -26,25 +26,25 @@ int	extencion_map(char *filename)
 
 int	num_player(char *line)
 {
-	int i;
-	int count_player;
+	int	i;
+	int	count_player;
 
 	i = 0;
 	count_player = 0;
 	while (line[i] || line[i] != '\n')
 	{
 		if (!ft_isalpha(line[i]) && line[i + 1] == P_SOUTH
-				&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
+			&& !ft_isalpha(line[i + 2]))
+			return (count_player += 1);
 		else if (!ft_isalpha(line[i]) && line[i + 1] == P_NORTH
 			&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
+			return (count_player += 1);
 		else if (!ft_isalpha(line[i]) && line[i + 1] == P_WEST
 			&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
+			return (count_player += 1);
 		else if (!ft_isalpha(line[i]) && line[i + 1] == P_EASTH
 			&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
+			return (count_player += 1);
 		else
 			i++;
 	}

@@ -28,6 +28,7 @@
 # define BLOCK_SIZE 64
 # define PLAYER_SIZE 8
 # define PI 3.14159265359
+# define FOV 0.66
 
 typedef struct s_image
 {
@@ -51,6 +52,7 @@ typedef struct s_parse_map
 	int	C_rgb[3];
 	int	map_start_line;
 	char **map;
+	char	*file_path;
 
 } 			t_parse_map;
 
@@ -110,20 +112,23 @@ typedef struct s_game
 	int			bpp;
 	int			size_line;
 	int			endian;
+	int			map_height;
+	int			map_width;
 	t_player	player;
 	char		**map;
 	int			floor_color;
 	int			ceiling_color;
 	t_tex		textures[4];
+	t_parse_map	map_data;
 }	t_game;
 
 // --- Protótipos de Funções ---
 
 // init.c
 void	init_game(t_game *game);
-void	init_player(t_player *player);
+void	init_player(t_game *game);
 char	**get_map(void);
-int		init_win(void);
+int		init_win(t_game *game);
 
 // hooks.c
 int		key_press(int keycode, t_game *game);
@@ -152,4 +157,8 @@ int			all_configs_loaded(t_parse_map *data);
 void		parse_colors(char *rgb_str, int *color_array);
 void		parse_config_line(char *line, t_parse_map *data);
 void		valid_map(t_parse_map *data, char *first_line, int fd);
+
+//utils
+void	free_map(char **map);
+void	free_game_data(t_game *game);
 #endif
