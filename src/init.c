@@ -30,11 +30,11 @@ static void	find_and_set_player_start(t_game *game)
 				game->player.x = (x * BLOCK_SIZE) + (BLOCK_SIZE / 2.0);
 				game->player.y = (y * BLOCK_SIZE) + (BLOCK_SIZE / 2.0);
 				if (cell == 'N')
-					game->player.angle = 3 * PI / 2;
+					game->player.angle = 3 * PI / 2; //270
 				else if (cell == 'S')
-					game->player.angle = PI / 2;
+					game->player.angle = PI / 2; //90
 				else if (cell == 'W')
-					game->player.angle = PI;
+					game->player.angle = PI; //180
 				else if (cell == 'E')
 					game->player.angle = 0;
 				game->map[y][x] = '0';
@@ -59,24 +59,24 @@ void	init_player(t_game *game)
 	find_and_set_player_start(game);
 }
 
-char	**get_map(void)
-{
-	char	**map;
+// char	**get_map(void)
+// {
+// 	char	**map;
 
-	map = malloc(sizeof(char *) * 11);
-	map[0] = "111111111111111";
-	map[1] = "100010000010001";
-	map[2] = "100000000000001";
-	map[3] = "100000100000001";
-	map[4] = "100000000000001";
-	map[5] = "100000000000001";
-	map[6] = "100001000000001";
-	map[7] = "100000000000101";
-	map[8] = "100000000000001";
-	map[9] = "111111111111111";
-	map[10] = NULL;
-	return (map);
-}
+// 	map = malloc(sizeof(char *) * 11);
+// 	map[0] = "111111111111111";
+// 	map[1] = "100010000010001";
+// 	map[2] = "100000000000001";
+// 	map[3] = "100000100000001";
+// 	map[4] = "100000000000001";
+// 	map[5] = "100000000000001";
+// 	map[6] = "100001000000001";
+// 	map[7] = "100000000000101";
+// 	map[8] = "100000000000001";
+// 	map[9] = "111111111111111";
+// 	map[10] = NULL;
+// 	return (map);
+// }
 
 void	load_textures(t_game *game)
 {
