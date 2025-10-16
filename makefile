@@ -29,6 +29,7 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/hooks.c \
 		$(SRC_DIR)/parse_textures.c \
 		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/utils_render.c \
 		$(SRC_DIR)/map.c \
 		$(SRC_DIR)/render.c
 

@@ -14,7 +14,10 @@
 
 int	exit_program(t_game *game)
 {
+	free_game_data(game);
+	mlx_destroy_image(game->mlx, game->img);
 	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
 	exit(0);
 }
 

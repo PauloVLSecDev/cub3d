@@ -1,6 +1,43 @@
 
 #include "../inc/cub3d.h"
 
+void	free_map(char **map)
+{
+	int i;
+
+	i = 0;
+	if (!map)
+		return ;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
+void	free_game_data(t_game *game)
+{
+	free(game->map_data.Texture_NO);
+	free(game->map_data.Texture_SO);
+	free(game->map_data.Texture_WE);
+	free(game->map_data.Texture_EA);
+	free_map(game->map_data.map);
+}
+
+void	trim_newline(char *str)
+{
+	int	len;
+
+	if (!str)
+		return ;
+	len = ft_strlen(str);
+	if (len > 0 && str[len - 1] == '\n')
+	{
+		str[len - 1] = '\0';
+	}
+}
+
 int	all_configs_loaded(t_parse_map *data)
 {
 	if (data->Texture_NO && data->Texture_SO && data->Texture_WE
@@ -18,9 +55,12 @@ void	parse_config_line(char *line, t_parse_map *data)
 	{
 		if (tokens)
 			free_array(tokens);
-		return;
+		return ;
 	}
-
+	if (tokens[1])
+	{
+		trim_newline(tokens[1]);
+	}
 	if (ft_strncmp(tokens[0], "NO", 3) == 0 && !data->Texture_NO)
 		data->Texture_NO = ft_strdup(tokens[1]);
 	else if (ft_strncmp(tokens[0], "SO", 3) == 0 && !data->Texture_SO)
@@ -35,7 +75,7 @@ void	parse_config_line(char *line, t_parse_map *data)
 		parse_colors(tokens[1], data->C_rgb);
 	else
 	{
-		if(!all_configs_loaded(data))
+		if (!all_configs_loaded(data))
 			printf("Erro: Linha de configuração inválida: %s\n", line);
 	}
 	free_array(tokens);
@@ -52,9 +92,8 @@ void	parse_colors(char *rgb_str, int *color_array)
 		printf("Erro: Formato de cor RGB inválido.\n");
 		if (rgb_val)
 			free_array(rgb_val);
-		return;
+		return ;
 	}
-
 	i = 0;
 	while (i < 3)
 	{
@@ -63,7 +102,7 @@ void	parse_colors(char *rgb_str, int *color_array)
 		{
 			printf("Error: color value valid is 0-255.\n");
 			color_array[0] = -1;
-			break;
+			break ;
 		}
 		i++;
 	}

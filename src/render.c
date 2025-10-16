@@ -45,13 +45,28 @@ void	draw_filled_square(int x, int y, int size, int color, t_game *game)
 
 void	init_ray(t_ray *ray, t_player *player, int x)
 {
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+
+	dir_x = cos(player->angle);
+	dir_y = sin(player->angle);
+	plane_x = -dir_y;
+	plane_y = dir_x;
 	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
-	ray->ray_dir_x = cos(player->angle) - sin(player->angle) * ray->camera_x;
-	ray->ray_dir_y = sin(player->angle) + cos(player->angle) * ray->camera_x;
-	ray->map_x = (int)player->x / BLOCK_SIZE;
-	ray->map_y = (int)player->y / BLOCK_SIZE;
-	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
-	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+	ray->ray_dir_x = dir_x + plane_x * FOV * ray->camera_x;
+	ray->ray_dir_y = dir_y + plane_y * FOV * ray->camera_x;
+	ray->map_x = (int)(player->x / BLOCK_SIZE);
+	ray->map_y = (int)(player->y / BLOCK_SIZE);
+	if (ray->ray_dir_x == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	if (ray->ray_dir_y == 0)
+		ray->delta_dist_y = 1e30;
+	else
+		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 	ray->hit = 0;
 }
 
@@ -99,38 +114,43 @@ void	perform_dda(t_ray *ray, t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (game->map[ray->map_y][ray->map_x] == '1')
+		if (ray->map_y < 0 || ray->map_y >= game->map_height || \
+			ray->map_x < 0 || ray->map_x >= game->map_width)
+		{
 			ray->hit = 1;
+		}
+		else if (game->map[ray->map_y][ray->map_x] == '1')
+		{
+			ray->hit = 1;
+		}
 	}
 }
 
 void	draw_vertical_line(t_game *game, t_ray *ray, int x)
 {
-	int	y;
-	int	color;
-	int tex_y;
+	int		y;
+	int		tex_y;
+	double	tex_pos;
+	double	step;
+	int		color;
 
 	y = 0;
 	while (y < ray->draw_start)
-	{
-		put_pixel(x, y, game->ceiling_color, game);
-		y++;
-	}
+		put_pixel(x, y++, game->ceiling_color, game);
+	step = 1.0 * game->textures[ray->side].height / ray->line_height;
+	tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
 	while (y < ray->draw_end)
 	{
-		tex_y = (int)((y - ray->draw_start)
-				* game->textures[ray->side].height / ray->line_height);
+		tex_y = (int)tex_pos;
+		tex_pos += step;
 		color = *(int *)(game->textures[ray->side].addr
-				+ (tex_y * game->textures[ray->side].line_len + ray->tex_x
-					* (game->textures[ray->side].bpp / 8)));
+				+ (tex_y * game->textures[ray->side].line_len
+					+ ray->tex_x * (game->textures[ray->side].bpp / 8)));
 		put_pixel(x, y, color, game);
 		y++;
 	}
 	while (y < WIN_HEIGHT)
-	{
-		put_pixel(x, y, game->floor_color, game);
-		y++;
-	}
+		put_pixel(x, y++, game->floor_color, game);
 }
 
 void	raycasting(t_game *game)
@@ -184,9 +204,11 @@ void	draw_minimap(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '1')
-				draw_filled_square(x * mini_block_size, y * mini_block_size, mini_block_size, 0x808080, game);
+				draw_filled_square(x * mini_block_size, y * mini_block_size,
+					mini_block_size, 0x808080, game);
 			else if (game->map[y][x] == '0')
-				draw_filled_square(x * mini_block_size, y * mini_block_size, mini_block_size, 0xC0C0C0, game);
+				draw_filled_square(x * mini_block_size, y * mini_block_size,
+					mini_block_size, 0xC0C0C0, game);
 			x++;
 		}
 		y++;
@@ -195,13 +217,17 @@ void	draw_minimap(t_game *game)
 
 void	draw_player_minimap(t_game *game)
 {
-	int mini_player_size = PLAYER_SIZE / 4;
-	draw_filled_square(game->player.x / 4 - mini_player_size / 2, game->player.y / 4 - mini_player_size / 2, mini_player_size, 0xFF0000, game);
+	int	mini_player_size;
+
+	mini_player_size = PLAYER_SIZE / 4;
+	draw_filled_square(game->player.x / 4 - mini_player_size / 2,
+		game->player.y / 4 - mini_player_size / 2,
+		mini_player_size, 0xFF0000, game);
 }
 
 int	render_loop(t_game *game)
 {
-	move_player(&game->player, game->map);
+	move_player(&game->player, game->map_data.map);
 	raycasting(game);
 	draw_minimap(game);
 	draw_player_minimap(game);
