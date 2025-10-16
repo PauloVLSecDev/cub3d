@@ -21,14 +21,14 @@
 # include <math.h>
 # include <stdbool.h>
 
-# define WIN_HEIGHT 1080
-# define WIN_WIDTH 1920
+# define WIN_HEIGHT 720
+# define WIN_WIDTH 1080
 
 # define MOVE_SPEED 3
 # define BLOCK_SIZE 64
 # define PLAYER_SIZE 8
 # define PI 3.14159265359
-# define FOV 0.66
+# define FOV 0.86
 
 typedef struct s_image
 {
@@ -161,4 +161,6 @@ void		valid_map(t_parse_map *data, char *first_line, int fd);
 //utils
 void	free_map(char **map);
 void	free_game_data(t_game *game);
+int		rgb_to_int(int r, int g, int b);
+
 #endif

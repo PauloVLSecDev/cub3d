@@ -138,8 +138,10 @@ void	init_game(t_game *game)
 	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
 			&game->endian);
 	load_textures(game);
-	game->floor_color = 0x404040;
-	game->ceiling_color = 0x87CEEB;
+	game->floor_color = rgb_to_int(game->map_data.C_rgb[0], \
+	game->map_data.C_rgb[1], game->map_data.C_rgb[2]);
+	game->ceiling_color = rgb_to_int(game->map_data.F_rgb[0], \
+	game->map_data.F_rgb[1], game->map_data.F_rgb[2]);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 

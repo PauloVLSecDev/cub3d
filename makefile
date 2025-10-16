@@ -6,7 +6,7 @@
 #    By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/15 01:01:06 by yurivieirad       #+#    #+#              #
-#    Updated: 2025/10/14 20:21:20 by yurivieirad      ###   ########.fr        #
+#    Updated: 2025/10/16 20:12:27 by yurivieirad      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/hooks.c \
 		$(SRC_DIR)/parse_textures.c \
 		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/utils_render.c \
 		$(SRC_DIR)/map.c \
 		$(SRC_DIR)/render.c
 

@@ -6,7 +6,7 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 01:09:09 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/15 21:36:16 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/15 22:18:44 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	parse_map_file(int fd, t_parse_map *data)
 			{
 				data->map_start_line = line_num;
 				valid_map(data, line, fd);
+				break ;
 			}
 		}
 		free(line);

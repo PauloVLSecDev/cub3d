@@ -6,7 +6,7 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:49:56 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/15 21:38:31 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/16 19:52:46 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,31 +127,29 @@ void	perform_dda(t_ray *ray, t_game *game)
 
 void	draw_vertical_line(t_game *game, t_ray *ray, int x)
 {
-	int	y;
-	int	color;
-	int	tex_y;
+	int		y;
+	int		tex_y;
+	double	tex_pos;
+	double	step;
+	int		color;
 
 	y = 0;
 	while (y < ray->draw_start)
-	{
-		put_pixel(x, y, game->ceiling_color, game);
-		y++;
-	}
+		put_pixel(x, y++, game->ceiling_color, game);
+	step = 1.0 * game->textures[ray->side].height / ray->line_height;
+	tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
 	while (y < ray->draw_end)
 	{
-		tex_y = (int)((y - ray->draw_start)
-				* game->textures[ray->side].height / ray->line_height);
+		tex_y = (int)tex_pos;
+		tex_pos += step;
 		color = *(int *)(game->textures[ray->side].addr
-				+ (tex_y * game->textures[ray->side].line_len + ray->tex_x
-					* (game->textures[ray->side].bpp / 8)));
+				+ (tex_y * game->textures[ray->side].line_len
+					+ ray->tex_x * (game->textures[ray->side].bpp / 8)));
 		put_pixel(x, y, color, game);
 		y++;
 	}
 	while (y < WIN_HEIGHT)
-	{
-		put_pixel(x, y, game->floor_color, game);
-		y++;
-	}
+		put_pixel(x, y++, game->floor_color, game);
 }
 
 void	raycasting(t_game *game)
@@ -205,9 +203,11 @@ void	draw_minimap(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '1')
-				draw_filled_square(x * mini_block_size, y * mini_block_size, mini_block_size, 0x808080, game);
+				draw_filled_square(x * mini_block_size, y * mini_block_size,
+					mini_block_size, 0x808080, game);
 			else if (game->map[y][x] == '0')
-				draw_filled_square(x * mini_block_size, y * mini_block_size, mini_block_size, 0xC0C0C0, game);
+				draw_filled_square(x * mini_block_size, y * mini_block_size,
+					mini_block_size, 0xC0C0C0, game);
 			x++;
 		}
 		y++;
@@ -216,8 +216,12 @@ void	draw_minimap(t_game *game)
 
 void	draw_player_minimap(t_game *game)
 {
-	int mini_player_size = PLAYER_SIZE / 4;
-	draw_filled_square(game->player.x / 4 - mini_player_size / 2, game->player.y / 4 - mini_player_size / 2, mini_player_size, 0xFF0000, game);
+	int	mini_player_size;
+
+	mini_player_size = PLAYER_SIZE / 4;
+	draw_filled_square(game->player.x / 4 - mini_player_size / 2,
+		game->player.y / 4 - mini_player_size / 2,
+		mini_player_size, 0xFF0000, game);
 }
 
 int	render_loop(t_game *game)
