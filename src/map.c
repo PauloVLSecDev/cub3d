@@ -97,12 +97,10 @@ void	valid_map(t_parse_map *data, char *first_line, int fd)
 		current_line = get_next_line(fd);
 		if (!current_line)
 			break ;
-		little_validade(current_line);
 		if (line_is_empty(current_line))
 		{
 			free(current_line);
-			//ft_free_list(map_line)
-			return  ;
+			break ;
 		}
 		little_validade(current_line);
 		ft_lsadd_back(&map_lines, create_node(current_line));
