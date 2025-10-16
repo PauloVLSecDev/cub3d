@@ -84,8 +84,8 @@ void	parse_map_file(int fd, t_parse_map *data)
 			if (data->map_start_line == -1)
 			{
 				data->map_start_line = line_num;
-					valid_map(data, line, fd);
-					return ;
+				valid_map(data, line, fd);
+				return ;
 			}
 		}
 		free(line);

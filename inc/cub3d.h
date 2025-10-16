@@ -59,6 +59,7 @@ typedef struct s_parse_map
 	int	F_rgb[3];
 	int	C_rgb[3];
 	int	map_start_line;
+	int	largest_line;
 	char **map;
 
 } 			t_parse_map;
