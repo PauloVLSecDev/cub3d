@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/cub3d.h"
 
 void	put_pixel(int x, int y, int color, t_game *game)
@@ -108,7 +107,7 @@ void	draw_vertical_line(t_game *game, t_ray *ray, int x)
 {
 	int	y;
 	int	color;
-	int tex_y;
+	int	tex_y;
 
 	y = 0;
 	while (y < ray->draw_start)
@@ -118,10 +117,10 @@ void	draw_vertical_line(t_game *game, t_ray *ray, int x)
 	}
 	while (y < ray->draw_end)
 	{
-		tex_y = (int)((y - ray->draw_start)
-				* game->textures[ray->side].height / ray->line_height);
-		color = *(int *)(game->textures[ray->side].addr
-				+ (tex_y * game->textures[ray->side].line_len + ray->tex_x
+		tex_y = (int)((y - ray->draw_start) * game->textures[ray->side].height
+				/ ray->line_height);
+		color = *(int *)(game->textures[ray->side].addr + (tex_y
+					* game->textures[ray->side].line_len + ray->tex_x
 					* (game->textures[ray->side].bpp / 8)));
 		put_pixel(x, y, color, game);
 		y++;
@@ -145,9 +144,11 @@ void	raycasting(t_game *game)
 		calculate_step_and_side_dist(&ray, &game->player);
 		perform_dda(&ray, game);
 		if (ray.side == 0)
-			ray.perp_wall_dist = (ray.map_x - game->player.x / BLOCK_SIZE + (1 - ray.step_x) / 2) / ray.ray_dir_x;
+			ray.perp_wall_dist = (ray.map_x - game->player.x / BLOCK_SIZE + (1
+						- ray.step_x) / 2) / ray.ray_dir_x;
 		else
-			ray.perp_wall_dist = (ray.map_y - game->player.y / BLOCK_SIZE + (1 - ray.step_y) / 2) / ray.ray_dir_y;
+			ray.perp_wall_dist = (ray.map_y - game->player.y / BLOCK_SIZE + (1
+						- ray.step_y) / 2) / ray.ray_dir_y;
 		ray.line_height = (int)(WIN_HEIGHT / ray.perp_wall_dist);
 		ray.draw_start = -ray.line_height / 2 + WIN_HEIGHT / 2;
 		if (ray.draw_start < 0)
@@ -156,9 +157,11 @@ void	raycasting(t_game *game)
 		if (ray.draw_end >= WIN_HEIGHT)
 			ray.draw_end = WIN_HEIGHT - 1;
 		if (ray.side == 0)
-			ray.wall_x = game->player.y / BLOCK_SIZE + ray.perp_wall_dist * ray.ray_dir_y;
+			ray.wall_x = game->player.y / BLOCK_SIZE + ray.perp_wall_dist
+				* ray.ray_dir_y;
 		else
-			ray.wall_x = game->player.x / BLOCK_SIZE + ray.perp_wall_dist * ray.ray_dir_x;
+			ray.wall_x = game->player.x / BLOCK_SIZE + ray.perp_wall_dist
+				* ray.ray_dir_x;
 		ray.wall_x -= floor(ray.wall_x);
 		ray.tex_x = (int)(ray.wall_x * (double)game->textures[ray.side].width);
 		if (ray.side == 0 && ray.ray_dir_x > 0)
@@ -184,9 +187,11 @@ void	draw_minimap(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '1')
-				draw_filled_square(x * mini_block_size, y * mini_block_size, mini_block_size, 0x808080, game);
+				draw_filled_square(x * mini_block_size, y * mini_block_size,
+					mini_block_size, 0x808080, game);
 			else if (game->map[y][x] == '0')
-				draw_filled_square(x * mini_block_size, y * mini_block_size, mini_block_size, 0xC0C0C0, game);
+				draw_filled_square(x * mini_block_size, y * mini_block_size,
+					mini_block_size, 0xC0C0C0, game);
 			x++;
 		}
 		y++;
@@ -195,8 +200,11 @@ void	draw_minimap(t_game *game)
 
 void	draw_player_minimap(t_game *game)
 {
-	int mini_player_size = PLAYER_SIZE / 4;
-	draw_filled_square(game->player.x / 4 - mini_player_size / 2, game->player.y / 4 - mini_player_size / 2, mini_player_size, 0xFF0000, game);
+	int	mini_player_size;
+
+	mini_player_size = PLAYER_SIZE / 4;
+	draw_filled_square(game->player.x / 4 - mini_player_size / 2, game->player.y
+		/ 4 - mini_player_size / 2, mini_player_size, 0xFF0000, game);
 }
 
 int	render_loop(t_game *game)

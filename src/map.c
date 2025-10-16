@@ -6,27 +6,28 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/14 20:07:31 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:08:09 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-static void	little_validade(char *current_line);
-static int 	map_size_list(t_parse_map *data);
-static 		t_list	*create_node(char *content);
+static void		little_validade(char *current_line);
+static int		map_size_list(t_parse_map *data);
+static t_list	*create_node(char *content);
 static void		ft_lsadd_back(t_list **head, t_list *new);
-static void	get_largest_line(t_parse_map *data);
-static void	convert_list_to_map(t_parse_map *data);
-static char 	**duplicate_map(t_parse_map *data);
+static void		get_largest_line(t_parse_map *data);
+static void		convert_list_to_map(t_parse_map *data);
+static char		**duplicate_map(t_parse_map *data);
+static char		**trim_map(char **map, int map_size);
 
 static t_list	*create_node(char *content)
 {
-	t_list *new;
+	t_list	*new;
 
 	new = malloc(sizeof(t_list));
 	if (!new)
-		return (NULL);	
+		return (NULL);
 	new->line = ft_strdup(content);
 	if (!new->line)
 	{
@@ -37,10 +38,9 @@ static t_list	*create_node(char *content)
 	return (new);
 }
 
-
-static void	ft_lsadd_back(t_list **head, t_list *new) 
+static void	ft_lsadd_back(t_list **head, t_list *new)
 {
-	t_list *last;
+	t_list	*last;
 
 	if (!head || !new)
 		return ;
@@ -55,23 +55,23 @@ static void	ft_lsadd_back(t_list **head, t_list *new)
 	last->next = new;
 }
 
-static int map_size_list(t_parse_map *data)
+static int	map_size_list(t_parse_map *data)
 {
-	int size_map;
+	int		map_size;
+	t_list	*map;
 
-	size_map = 0;	
-	t_list *map;
+	map_size = 0;
 	map = data->list;
 	while (map)
 	{
 		if (!line_is_empty(map->line))
-			size_map++;
-		map = map->next;	
+			map_size++;
+		map = map->next;
 	}
-	return (size_map);
+	return (map_size);
 }
 
-static void little_validade( char *current_line)  
+static void	little_validade(char *current_line)
 {
 	if (!is_valid_map_line(current_line))
 	{
@@ -83,8 +83,8 @@ static void little_validade( char *current_line)
 
 void	valid_map(t_parse_map *data, char *first_line, int fd)
 {
-	t_list *map_lines;
-	char *current_line;
+	t_list	*map_lines;
+	char	*current_line;
 
 	map_lines = NULL;
 	if (first_line)
@@ -112,22 +112,40 @@ void	valid_map(t_parse_map *data, char *first_line, int fd)
 
 static void	convert_list_to_map(t_parse_map *data)
 {
-//	t_list *tmp;
+	int	map_size;
+	char **map_copy;
 
-//	tmp = data->list;
 	get_largest_line(data);
-	printf("size of largest line %i\n", data->largest_line);
-
-	data->map = malloc(sizeof(map_size_list(data)));
+	map_copy = duplicate_map(data);
+	if (!map_copy)
+	{
+		//free_struct(data);
+		exit(1);
+	}
+	find_player(map_copy, data);
+//	if (!flood_fll(map_copy, 0, 0, data);
+//	{
+	//	free_array(map_copy);
+	//		free_struct(data);
+	//	printf("error: flood fill\n");
+	//	exit(1);
+//	}
 	if (!data->map)
 		return ;
-	data->map = duplicate_map(data);
+	map_size = map_size_list(data);
+	data->map = trim_map(map_copy, map_size);
+	if (!data->map)
+	{
+		// clean_all(
+	}
+	free_array(map_copy);
+	return ;
 }
 
-static char **duplicate_map(t_parse_map *data)
+static char	**duplicate_map(t_parse_map *data)
 {
 	t_list	*tmp;
-	int	i;
+	int		i;
 	char	**map;
 
 	map = malloc(sizeof(char *) * map_size_list(data) + 1);
@@ -139,39 +157,48 @@ static char **duplicate_map(t_parse_map *data)
 	{
 		if (tmp->line)
 			map[i] = ft_strdup(tmp->line);
-		else 
+		else
 			free_array(map);
 		i++;
 		tmp = tmp->next;
 	}
 	map[i] = NULL;
-	i = 0;
-	while (map[i] != NULL)
-	{
-		printf("line %i %s\n", i, map[i]);
-		i++;
-	}
-	printf("looping finish\n");
 	return (map);
 }
 
 static void	get_largest_line(t_parse_map *data)
 {
-	t_list *tmp;
-	int size_line;
-	int current_len;
+	t_list	*tmp;
+	int		size_line;
+	int		current_len;
 
 	tmp = data->list;
 	size_line = 0;
 	current_len = 0;
-
 	while (tmp)
 	{
 		current_len = ft_strlen(tmp->line);
 		if (current_len > size_line)
-			size_line = current_len;	
+			size_line = current_len;
 		tmp = tmp->next;
 	}
 	data->largest_line = size_line;
 }
 
+static char	**trim_map(char **map, int map_size)
+{
+	char	**validated_map;
+	int		i;
+
+	i = 0;
+	validated_map = malloc(sizeof(char *) * map_size + 1);
+	if (!validated_map)
+		return (NULL);
+	while (map[i] != NULL)
+	{
+		validated_map[i] = ft_strtrim(map[i], " \t");
+		i++;
+	}
+	validated_map[i] = NULL;
+	return (validated_map);
+}

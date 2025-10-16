@@ -6,7 +6,7 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 01:09:09 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/14 20:41:08 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:13:25 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ int	is_valid_map_line(char *line)
 
 	if (!line)
 		return (0);
-	valid_chars = " 01NSWE";
+	valid_chars = " \t01NSWE";
 	i = 0;
-	
 	while (line[i] != '\0' && line[i] != '\n')
 	{
 		if (ft_strchr(valid_chars, line[i]) == NULL)
@@ -33,7 +32,7 @@ int	is_valid_map_line(char *line)
 
 bool	line_is_empty(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] != '\0')
@@ -45,10 +44,11 @@ bool	line_is_empty(char *line)
 	return (true);
 }
 
-void init_data(t_parse_map *data)
+void	init_data(t_parse_map *data)
 {
-	data->list = malloc(sizeof(t_list)); 
-	data->list->next = NULL;
+	data->list = NULL;
+	data->initial_y = 0;
+	data->initial_x = 0;
 	data->num_lines = 0;
 	data->Texture_NO = NULL;
 	data->Texture_SO = NULL;
@@ -58,7 +58,6 @@ void init_data(t_parse_map *data)
 	data->C_rgb[0] = -1;
 	data->map_start_line = -1;
 	data->map = NULL;
-
 }
 
 void	parse_map_file(int fd, t_parse_map *data)
@@ -98,13 +97,13 @@ void	parse_map_file(int fd, t_parse_map *data)
 int	main(int argc, char *argv[])
 {
 	t_parse_map	*data;
-	int	fd;
+	int			fd;
 
 	data = malloc(sizeof(t_parse_map));
 	if (argc == 2)
 	{
 		if (!extencion_map(argv[1]))
-				printf("invalid extension");
+			printf("invalid extension");
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 			printf("%s invalid file \n", argv[1]);
@@ -120,6 +119,5 @@ int	main(int argc, char *argv[])
 		exit(1);
 	}
 	init_win();
-
 	return (0);
 }

@@ -25,31 +25,13 @@ void	init_player(t_player *player)
 	player->right_rotate = false;
 }
 
-char	**get_map(void)
-{
-	char	**map;
-
-	map = malloc(sizeof(char *) * 11);
-	map[0] = "111111111111111";
-	map[1] = "100010000010001";
-	map[2] = "100000000000001";
-	map[3] = "100000100000001";
-	map[4] = "100000000000001";
-	map[5] = "100000000000001";
-	map[6] = "100001000000001";
-	map[7] = "100000000000101";
-	map[8] = "100000000000001";
-	map[9] = "111111111111111";
-	map[10] = NULL;
-	return (map);
-}
-
 void	load_textures(t_game *game)
 {
-	int	i;
+	int		i;
+	char	*path;
 
 	i = 0;
-	char *path = "texture/open.xpm";
+	path = "texture/open.xpm";
 	while (i < 4)
 	{
 		game->textures[i].img = mlx_xpm_file_to_image(game->mlx, path,
@@ -83,7 +65,7 @@ void	init_game(t_game *game)
 
 int	init_win(void)
 {
-	t_game	game;
+	t_game game;
 
 	init_game(&game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game);

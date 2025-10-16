@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/15 01:01:06 by yurivieirad       #+#    #+#              #
-#    Updated: 2025/10/09 18:55:00 by yurivieirad      ###   ########.fr        #
+#    Updated: 2025/10/16 19:02:39 by pvitor-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/parse_textures.c \
 		$(SRC_DIR)/utils.c \
 		$(SRC_DIR)/map.c \
-		$(SRC_DIR)/render.c
+		$(SRC_DIR)/render.c \
+		$(SRC_DIR)/floodfill.c
+
 
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(FILES))
 

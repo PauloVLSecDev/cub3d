@@ -1,52 +1,108 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_textures.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/18 16:55:06 by pvitor-l          #+#    #+#             */
+/*   Updated: 2025/10/16 16:32:44 by pvitor-l         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	extencion_map(char *filename)
+int	all_configs_loaded(t_parse_map *data)
 {
-	int	i;
-	int	valid;
+	if (data->Texture_NO && data->Texture_SO && data->Texture_WE
+		&& data->Texture_EA && data->F_rgb[0] != -1 && data->C_rgb[0] != -1)
+		return (1);
+	return (0);
+}
 
-	i = 0;
-	valid = 0;
-	if (filename[i] == '.')
-		return (valid);
-	while (filename[i] != '\0' && valid == 0)
+void	parse_config_line(char *line, t_parse_map *data)
+{
+	char	**tokens;
+
+	tokens = ft_split(line, ' ');
+	if (!tokens || !tokens[0])
 	{
-		if ((filename[i] == '.' && filename[i + 1] == 'c') && (filename[i
-				+ 2] == 'u' && filename[i + 3] == 'b') && (filename[i
-				+ 4] == '\0'))
+		if (tokens)
+			free_array(tokens);
+		return ;
+	}
+	if (ft_strncmp(tokens[0], "NO", 3) == 0 && !data->Texture_NO)
+		data->Texture_NO = ft_strdup(tokens[1]);
+	else if (ft_strncmp(tokens[0], "SO", 3) == 0 && !data->Texture_SO)
+		data->Texture_SO = ft_strdup(tokens[1]);
+	else if (ft_strncmp(tokens[0], "WE", 3) == 0 && !data->Texture_WE)
+		data->Texture_WE = ft_strdup(tokens[1]);
+	else if (ft_strncmp(tokens[0], "EA", 3) == 0 && !data->Texture_EA)
+		data->Texture_EA = ft_strdup(tokens[1]);
+	else if (ft_strncmp(tokens[0], "F", 2) == 0 && data->F_rgb[0] == -1)
+		parse_colors_F(tokens[1], data);
+	else if (ft_strncmp(tokens[0], "C", 2) == 0 && data->C_rgb[0] == -1)
+		parse_colors_C(tokens[1], data);
+	else
+	{
+		if (!all_configs_loaded(data))
+			printf("Error: line invalid : %s\n", line);
+	}
+	free_array(tokens);
+}
+
+void	parse_colors_C(char *rgb_str, t_parse_map *data)
+{
+	char	**rgb_val;
+	int		i;
+
+	rgb_val = ft_split(rgb_str, ',');
+	if (!rgb_val || !rgb_val[0] || !rgb_val[1] || !rgb_val[2] || rgb_val[3])
+	{
+		printf("Error: Color format RGB invalid.\n");
+		if (rgb_val)
+			free_array(rgb_val);
+		return ;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		data->C_rgb[i] = ft_atoi(rgb_val[i]);
+		if (data->C_rgb[i] < 0 || data->C_rgb[i] > 255)
 		{
-			valid += 1;
-			printf("extencaio map is valid\n");
+			printf("Error: color value valid is 0-255.\n");
+			data->C_rgb[0] = -1;
+			break ;
 		}
 		i++;
 	}
-	return (valid);
+	free_array(rgb_val);
 }
 
-int	num_player(char *line)
+void	parse_colors_F(char *rgb_str, t_parse_map *data)
 {
-	int i;
-	int count_player;
+	char	**rgb_val;
+	int		i;
 
-	i = 0;
-	count_player = 0;
-	while (line[i] || line[i] != '\n')
+	rgb_val = ft_split(rgb_str, ',');
+	if (!rgb_val || !rgb_val[0] || !rgb_val[1] || !rgb_val[2] || rgb_val[3])
 	{
-		if (!ft_isalpha(line[i]) && line[i + 1] == P_SOUTH
-				&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
-		else if (!ft_isalpha(line[i]) && line[i + 1] == P_NORTH
-			&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
-		else if (!ft_isalpha(line[i]) && line[i + 1] == P_WEST
-			&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
-		else if (!ft_isalpha(line[i]) && line[i + 1] == P_EASTH
-			&& !ft_isalpha(line[i + 2]))
-				return (count_player += 1);
-		else
-			i++;
+		printf("Error: Color format RGB invalid.\n");
+		if (rgb_val)
+			free_array(rgb_val);
+		return ;
 	}
-	return (count_player);
+	i = 0;
+	while (i < 3)
+	{
+		data->F_rgb[i] = ft_atoi(rgb_val[i]);
+		if (data->F_rgb[i] < 0 || data->F_rgb[i] > 255)
+		{
+			printf("Error: color value valid is 0-255.\n");
+			data->F_rgb[0] = -1;
+			break ;
+		}
+		i++;
+	}
+	free_array(rgb_val);
 }

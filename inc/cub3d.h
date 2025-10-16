@@ -48,8 +48,8 @@ typedef struct s_image
 typedef struct s_parse_map
 {
 	int num_lines;
-	int	wall;
-	int empyt;
+	int initial_y;
+	int initial_x;
 	char *Texture_SO;
 	char *Texture_NO;
 	char *Texture_WE;
@@ -164,4 +164,6 @@ void		parse_colors_C(char *rgb_str, t_parse_map *data);
 void		parse_config_line(char *line, t_parse_map *data);
 void		valid_map(t_parse_map *data, char *first_line, int fd);
 int			is_valid_map_line(char *line);
+void		find_player(char **map_copy, t_parse_map *data);
+
 #endif
