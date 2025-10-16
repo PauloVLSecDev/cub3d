@@ -6,9 +6,10 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:49:56 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/16 19:52:46 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/01 19:49:57 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/cub3d.h"
 

@@ -21,8 +21,8 @@
 # include <math.h>
 # include <stdbool.h>
 
-# define WIN_HEIGHT 720
-# define WIN_WIDTH 1080
+# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1920
 
 # define MOVE_SPEED 3
 # define BLOCK_SIZE 64
