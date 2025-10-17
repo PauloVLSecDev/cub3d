@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:45:11 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/16 19:37:40 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:08:06 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	find_player(char **map_copy, t_parse_map *data)
 		{ 
 			if (ft_strchr(characters_player, map_copy[y][x]))
 			{
-					data->initial_y = y;
-					data->initial_x = x;
+					data->initial_y = (float)y;
+					data->initial_x = (float)x;
 					count_player++;
 			}
 			x++;
@@ -55,7 +55,7 @@ void	find_player(char **map_copy, t_parse_map *data)
 		free_array(map_copy);			
 		exit(1);
 	}
-	printf ("player possicion is %i %i \n", data->initial_y, data->initial_x);
+	printf ("player possicion is %f %f \n", data->initial_y, data->initial_x);
 }
 
 

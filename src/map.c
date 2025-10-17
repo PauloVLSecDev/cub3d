@@ -123,15 +123,13 @@ static void	convert_list_to_map(t_parse_map *data)
 		exit(1);
 	}
 	find_player(map_copy, data);
-//	if (!flood_fll(map_copy, 0, 0, data);
-//	{
-	//	free_array(map_copy);
-	//		free_struct(data);
-	//	printf("error: flood fill\n");
-	//	exit(1);
-//	}
-	if (!data->map)
-		return ;
+//    if (!flood_fll(map_copy, 0, 0, data);
+//    {
+	//  free_array(map_copy);
+	//      free_struct(data);
+	//  printf("error: flood fill\n");
+	//  exit(1);
+//  }
 	map_size = map_size_list(data);
 	data->map = trim_map(map_copy, map_size);
 	if (!data->map)
@@ -148,7 +146,7 @@ static char	**duplicate_map(t_parse_map *data)
 	int		i;
 	char	**map;
 
-	map = malloc(sizeof(char *) * map_size_list(data) + 1);
+	map = malloc(sizeof(char *) * (map_size_list(data) + 1));
 	i = 0;
 	if (!map)
 		return (NULL);
@@ -158,7 +156,10 @@ static char	**duplicate_map(t_parse_map *data)
 		if (tmp->line)
 			map[i] = ft_strdup(tmp->line);
 		else
+		{
 			free_array(map);
+			return (NULL);
+		}
 		i++;
 		tmp = tmp->next;
 	}
@@ -191,7 +192,7 @@ static char	**trim_map(char **map, int map_size)
 	int		i;
 
 	i = 0;
-	validated_map = malloc(sizeof(char *) * map_size + 1);
+	validated_map = malloc(sizeof(char *) * (map_size + 1));
 	if (!validated_map)
 		return (NULL);
 	while (map[i] != NULL)

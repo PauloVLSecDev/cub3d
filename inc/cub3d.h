@@ -49,8 +49,8 @@ typedef struct s_image
 typedef struct s_parse_map
 {
 	int num_lines;
-	int initial_y;
-	int initial_x;
+	float initial_y;
+	float initial_x;
 	char *Texture_SO;
 	char *Texture_NO;
 	char *Texture_WE;
