@@ -176,5 +176,5 @@ void	free_game_data(t_game *game);
 int		rgb_to_int(int r, int g, int b);
 int			is_valid_map_line(char *line);
 void		find_player(char **map_copy, t_parse_map *data, char *char_player);
-
+int			flood_fill(char **map_copy, int y, int x, int map_height);
 #endif

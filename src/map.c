@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/17 16:55:13 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/17 17:33:48 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ static void	convert_list_to_map(t_parse_map *data)
 	int	map_size;
 	char **map_copy;
 
+	map_size = map_size_list(data);
 	get_largest_line(data);
 	map_copy = duplicate_map(data);
 	if (!map_copy)
@@ -123,13 +124,12 @@ static void	convert_list_to_map(t_parse_map *data)
 		exit(1);
 	}
 	find_player(map_copy, data, "NWES");
-//    if (!flood_fll(map_copy, 0, 0, data);
-//    {
-	//  free_array(map_copy);
-	//      free_struct(data);
-	//  printf("error: flood fill\n");
-	//  exit(1);
-//  }
+	if (!flood_fill(map_copy, data->initial_y, data->initial_x, map_size))
+	{
+		  free_array(map_copy);
+		 //free_struct(data);
+		  exit(1);
+	}
 	map_size = map_size_list(data);
 	data->map = trim_map(map_copy, map_size);
 	if (!data->map)

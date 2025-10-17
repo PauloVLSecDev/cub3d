@@ -6,24 +6,37 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:45:11 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/17 16:54:47 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/17 17:35:54 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-/*
-int	flood_fill(char **map_copy, int player_y, int player_x, t_parse_data *data)
+int	flood_fill(char **map_copy, int y, int x, int map_height)
 {
-	int map_height;
-	inty map_width;
-
-	map_height = map_size_list(data);
-	map_width = data->largest_line;
-
-	map_copy[initial_y][initial_x]	
+	if (y < 0 || y >= map_height || x < 0 || x >= (int)ft_strlen(map_copy[y]))
+	{
+		printf("possicion player invalid");
+		return (0);
+	}
+	if (map_copy[y][x] == '1' || map_copy[y][x] == 'F')
+		return (1);
+	if (map_copy[y][x] == ' ' || map_copy[y][x] == '\t')
+	{
+		printf("error map: space found at %d,%d\n", y, x);
+		return (0);
+	}
+	map_copy[y][x] = 'F';
+	if (flood_fill(map_copy, y, x + 1, map_height) == 0)
+		return (0);
+	if (flood_fill(map_copy, y, x - 1, map_height) == 0)
+		return (0);
+	if (flood_fill(map_copy, y + 1, x, map_height) == 0)
+		return (0);
+	if (flood_fill(map_copy, y - 1 , x, map_height) == 0)
+		return (0);
+	return (1);
 }
-*/
 
 void	find_player(char **map_copy, t_parse_map *data, char *char_player) 
 {
