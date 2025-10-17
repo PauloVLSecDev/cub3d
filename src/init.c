@@ -16,7 +16,7 @@ static void	find_and_set_player_start(t_game *game)
 {
 	char cell;
 
-	cell = 'N';
+	cell = game->map_data.vision_player;
 	if (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
 	{
 			game->player.x = (game->map_data.initial_x * BLOCK_SIZE) + (BLOCK_SIZE / 2.0);

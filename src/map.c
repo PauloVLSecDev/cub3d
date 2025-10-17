@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/16 20:49:31 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:55:13 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ static void	convert_list_to_map(t_parse_map *data)
 		//free_struct(data);
 		exit(1);
 	}
-	find_player(map_copy, data);
+	find_player(map_copy, data, "NWES");
 //    if (!flood_fll(map_copy, 0, 0, data);
 //    {
 	//  free_array(map_copy);

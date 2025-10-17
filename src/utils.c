@@ -52,10 +52,7 @@ int	extencion_map(char *filename)
 		if ((filename[i] == '.' && filename[i + 1] == 'c') && (filename[i
 				+ 2] == 'u' && filename[i + 3] == 'b') && (filename[i
 				+ 4] == '\0'))
-		{
 			valid += 1;
-			printf("extencaio map is valid\n");
-		}
 		i++;
 	}
 	return (valid);

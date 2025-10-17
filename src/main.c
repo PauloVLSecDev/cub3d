@@ -6,7 +6,7 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 01:09:09 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/16 20:45:42 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:45:22 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("Arguments Error: insert: ./map map_name.cub\n");
+		printf("Arguments Error: insert: maps/map_name.cub\n");
 		exit(1);
 	}
 	init_win(&game);

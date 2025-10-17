@@ -49,6 +49,7 @@ typedef struct s_image
 typedef struct s_parse_map
 {
 	int num_lines;
+	char vision_player;
 	float initial_y;
 	float initial_x;
 	char *Texture_SO;
@@ -174,6 +175,6 @@ void	free_map(char **map);
 void	free_game_data(t_game *game);
 int		rgb_to_int(int r, int g, int b);
 int			is_valid_map_line(char *line);
-void		find_player(char **map_copy, t_parse_map *data);
+void		find_player(char **map_copy, t_parse_map *data, char *char_player);
 
 #endif
