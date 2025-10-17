@@ -6,11 +6,29 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 01:09:09 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/09 22:12:14 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/16 20:45:42 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+int	is_valid_map_line(char *line)
+{
+	char	*valid_chars;
+	int		i;
+
+	if (!line)
+		return (0);
+	valid_chars = " \t01NSWE";
+	i = 0;
+	while (line[i] != '\0' && line[i] != '\n')
+	{
+		if (ft_strchr(valid_chars, line[i]) == NULL)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 bool	line_is_empty(char *line)
 {
@@ -28,6 +46,9 @@ bool	line_is_empty(char *line)
 
 void	init_data(t_parse_map *data)
 {
+	data->list = NULL;
+	data->initial_y = 0;
+	data->initial_x = 0;
 	data->num_lines = 0;
 	data->Texture_NO = NULL;
 	data->Texture_SO = NULL;
@@ -63,7 +84,7 @@ void	parse_map_file(int fd, t_parse_map *data)
 			{
 				data->map_start_line = line_num;
 				valid_map(data, line, fd);
-				break ;
+				return ;
 			}
 		}
 		free(line);

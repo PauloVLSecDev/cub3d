@@ -30,6 +30,14 @@
 # define PI 3.14159265359
 # define FOV 0.86
 
+
+typedef struct s_list
+{
+	char *line;
+	struct s_list *next;
+
+}		t_list;
+
 typedef struct s_image
 {
 	char	**matriz;
@@ -41,16 +49,18 @@ typedef struct s_image
 typedef struct s_parse_map
 {
 	int num_lines;
-	int	wall;
-	int empyt;
+	int initial_y;
+	int initial_x;
 	char *Texture_SO;
 	char *Texture_NO;
 	char *Texture_WE;
 	char *Texture_EA;
+	t_list *list;
 	int	W_texture;
 	int	F_rgb[3];
 	int	C_rgb[3];
 	int	map_start_line;
+	int	largest_line;
 	char **map;
 	char	*file_path;
 
@@ -154,7 +164,8 @@ int			valid_line(char *line, t_parse_map **data);
 void		init_data(t_parse_map *data);
 void		parse_map_file(int fd, t_parse_map *data);
 int			all_configs_loaded(t_parse_map *data);
-void		parse_colors(char *rgb_str, int *color_array);
+void		parse_colors_F(char *rgb_str, t_parse_map *data);
+void		parse_colors_C(char *rgb_str, t_parse_map *data);
 void		parse_config_line(char *line, t_parse_map *data);
 void		valid_map(t_parse_map *data, char *first_line, int fd);
 
@@ -162,5 +173,7 @@ void		valid_map(t_parse_map *data, char *first_line, int fd);
 void	free_map(char **map);
 void	free_game_data(t_game *game);
 int		rgb_to_int(int r, int g, int b);
+int			is_valid_map_line(char *line);
+void		find_player(char **map_copy, t_parse_map *data);
 
 #endif

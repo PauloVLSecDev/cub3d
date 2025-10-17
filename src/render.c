@@ -6,10 +6,9 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:49:56 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/01 19:49:57 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/16 21:18:42 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/cub3d.h"
 
@@ -165,9 +164,11 @@ void	raycasting(t_game *game)
 		calculate_step_and_side_dist(&ray, &game->player);
 		perform_dda(&ray, game);
 		if (ray.side == 0)
-			ray.perp_wall_dist = (ray.map_x - game->player.x / BLOCK_SIZE + (1 - ray.step_x) / 2) / ray.ray_dir_x;
+			ray.perp_wall_dist = (ray.map_x - game->player.x / BLOCK_SIZE + (1
+						- ray.step_x) / 2) / ray.ray_dir_x;
 		else
-			ray.perp_wall_dist = (ray.map_y - game->player.y / BLOCK_SIZE + (1 - ray.step_y) / 2) / ray.ray_dir_y;
+			ray.perp_wall_dist = (ray.map_y - game->player.y / BLOCK_SIZE + (1
+						- ray.step_y) / 2) / ray.ray_dir_y;
 		ray.line_height = (int)(WIN_HEIGHT / ray.perp_wall_dist);
 		ray.draw_start = -ray.line_height / 2 + WIN_HEIGHT / 2;
 		if (ray.draw_start < 0)
@@ -176,9 +177,11 @@ void	raycasting(t_game *game)
 		if (ray.draw_end >= WIN_HEIGHT)
 			ray.draw_end = WIN_HEIGHT - 1;
 		if (ray.side == 0)
-			ray.wall_x = game->player.y / BLOCK_SIZE + ray.perp_wall_dist * ray.ray_dir_y;
+			ray.wall_x = game->player.y / BLOCK_SIZE + ray.perp_wall_dist
+				* ray.ray_dir_y;
 		else
-			ray.wall_x = game->player.x / BLOCK_SIZE + ray.perp_wall_dist * ray.ray_dir_x;
+			ray.wall_x = game->player.x / BLOCK_SIZE + ray.perp_wall_dist
+				* ray.ray_dir_x;
 		ray.wall_x -= floor(ray.wall_x);
 		ray.tex_x = (int)(ray.wall_x * (double)game->textures[ray.side].width);
 		if (ray.side == 0 && ray.ray_dir_x > 0)
@@ -220,9 +223,8 @@ void	draw_player_minimap(t_game *game)
 	int	mini_player_size;
 
 	mini_player_size = PLAYER_SIZE / 4;
-	draw_filled_square(game->player.x / 4 - mini_player_size / 2,
-		game->player.y / 4 - mini_player_size / 2,
-		mini_player_size, 0xFF0000, game);
+	draw_filled_square(game->player.x / 4 - mini_player_size / 2, game->player.y
+		/ 4 - mini_player_size / 2, mini_player_size, 0xFF0000, game);
 }
 
 int	render_loop(t_game *game)

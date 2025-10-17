@@ -14,21 +14,13 @@
 
 static void	find_and_set_player_start(t_game *game)
 {
-	int		y;
-	int		x;
-	char	cell;
+	char cell;
 
-	y = 0;
-	while (y < game->map_height)
+	cell = 'N';
+	if (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
 	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			cell = game->map[y][x];
-			if (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
-			{
-				game->player.x = (x * BLOCK_SIZE) + (BLOCK_SIZE / 2.0);
-				game->player.y = (y * BLOCK_SIZE) + (BLOCK_SIZE / 2.0);
+			game->player.x = (game->map_data.initial_x * BLOCK_SIZE) + (BLOCK_SIZE / 2.0);
+			game->player.y = (game->map_data.initial_y * BLOCK_SIZE) + (BLOCK_SIZE / 2.0);
 				if (cell == 'N')
 					game->player.angle = 3 * PI / 2; //270
 				else if (cell == 'S')
@@ -37,15 +29,9 @@ static void	find_and_set_player_start(t_game *game)
 					game->player.angle = PI; //180
 				else if (cell == 'E')
 					game->player.angle = 0;
-				game->map[y][x] = '0';
+				//	game->map[y][x] = '0';
 				return ;
-			}
-			x++;
-		}
-		y++;
 	}
-	printf("Error\n: Player starting position not found in map!\n");
-	exit(1);
 }
 
 void	init_player(t_game *game)
@@ -59,24 +45,6 @@ void	init_player(t_game *game)
 	find_and_set_player_start(game);
 }
 
-// char	**get_map(void)
-// {
-// 	char	**map;
-
-// 	map = malloc(sizeof(char *) * 11);
-// 	map[0] = "111111111111111";
-// 	map[1] = "100010000010001";
-// 	map[2] = "100000000000001";
-// 	map[3] = "100000100000001";
-// 	map[4] = "100000000000001";
-// 	map[5] = "100000000000001";
-// 	map[6] = "100001000000001";
-// 	map[7] = "100000000000101";
-// 	map[8] = "100000000000001";
-// 	map[9] = "111111111111111";
-// 	map[10] = NULL;
-// 	return (map);
-// }
 
 void	load_textures(t_game *game)
 {
@@ -148,10 +116,10 @@ void	init_game(t_game *game)
 int	init_win(t_game *game)
 {
 	init_game(game);
-	mlx_hook(game->win, 2, 1L << 0, key_press, game);
-	mlx_hook(game->win, 3, 1L << 1, key_release, game);
-	mlx_hook(game->win, 17, 0, exit_program, game);
-	mlx_loop_hook(game->mlx, render_loop, game);
+	mlx_hook(game->win, 2, 1L << 0, key_press, &game);
+	mlx_hook(game->win, 3, 1L << 1, key_release, &game);
+	mlx_hook(game->win, 17, 0, exit_program, &game);
+	mlx_loop_hook(game->mlx, render_loop, &game);
 	mlx_loop(game->mlx);
 	return (0);
 }
