@@ -113,8 +113,8 @@ void	perform_dda(t_ray *ray, t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map_y < 0 || ray->map_y >= game->map_height || \
-			ray->map_x < 0 || ray->map_x >= game->map_width)
+		if (ray->map_y < 0 || ray->map_y >= game->map_height || ray->map_x < 0
+			|| ray->map_x >= game->map_width)
 		{
 			ray->hit = 1;
 		}
@@ -142,9 +142,9 @@ void	draw_vertical_line(t_game *game, t_ray *ray, int x)
 	{
 		tex_y = (int)tex_pos;
 		tex_pos += step;
-		color = *(int *)(game->textures[ray->side].addr
-				+ (tex_y * game->textures[ray->side].line_len
-					+ ray->tex_x * (game->textures[ray->side].bpp / 8)));
+		color = *(int *)(game->textures[ray->side].addr + (tex_y
+					* game->textures[ray->side].line_len + ray->tex_x
+					* (game->textures[ray->side].bpp / 8)));
 		put_pixel(x, y, color, game);
 		y++;
 	}

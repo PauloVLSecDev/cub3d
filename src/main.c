@@ -6,7 +6,7 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 01:09:09 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/17 16:45:22 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/17 20:09:59 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void	init_data(t_parse_map *data)
 	data->initial_y = 0;
 	data->initial_x = 0;
 	data->num_lines = 0;
-	data->Texture_NO = NULL;
-	data->Texture_SO = NULL;
-	data->Texture_WE = NULL;
-	data->Texture_EA = NULL;
-	data->F_rgb[0] = -1;
-	data->C_rgb[0] = -1;
+	data->texture_no = NULL;
+	data->texture_so = NULL;
+	data->texture_we = NULL;
+	data->texture_ea = NULL;
+	data->f_rgb[0] = -1;
+	data->c_rgb[0] = -1;
+	data->map_size = 0;
 	data->map_start_line = -1;
 	data->map = NULL;
 }
@@ -84,6 +85,7 @@ void	parse_map_file(int fd, t_parse_map *data)
 			{
 				data->map_start_line = line_num;
 				valid_map(data, line, fd);
+				free(line);
 				return ;
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:06 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/17 15:44:38 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:36:44 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	all_configs_loaded(t_parse_map *data)
 {
-	if (data->Texture_NO && data->Texture_SO && data->Texture_WE
-		&& data->Texture_EA && data->F_rgb[0] != -1 && data->C_rgb[0] != -1)
+	if (data->texture_no && data->texture_so && data->texture_we
+		&& data->texture_ea && data->f_rgb[0] != -1 && data->c_rgb[0] != -1)
 		return (1);
 	return (0);
 }
@@ -31,17 +31,17 @@ void	parse_config_line(char *line, t_parse_map *data)
 			free_array(tokens);
 		return ;
 	}
-	if (ft_strncmp(tokens[0], "NO", 3) == 0 && !data->Texture_NO)
-		data->Texture_NO = ft_strtrim(tokens[1], "\n");
-	else if (ft_strncmp(tokens[0], "SO", 3) == 0 && !data->Texture_SO)
-		data->Texture_SO = ft_strtrim(tokens[1], "\n");
-	else if (ft_strncmp(tokens[0], "WE", 3) == 0 && !data->Texture_WE)
-		data->Texture_WE = ft_strtrim(tokens[1], "\n");
-	else if (ft_strncmp(tokens[0], "EA", 3) == 0 && !data->Texture_EA)
-		data->Texture_EA = ft_strtrim(tokens[1], "\n");
-	else if (ft_strncmp(tokens[0], "F", 2) == 0 && data->F_rgb[0] == -1)
+	if (ft_strncmp(tokens[0], "NO", 3) == 0 && !data->texture_no)
+		data->texture_no = ft_strtrim(tokens[1], "\n");
+	else if (ft_strncmp(tokens[0], "SO", 3) == 0 && !data->texture_so)
+		data->texture_so = ft_strtrim(tokens[1], "\n");
+	else if (ft_strncmp(tokens[0], "WE", 3) == 0 && !data->texture_we)
+		data->texture_we = ft_strtrim(tokens[1], "\n");
+	else if (ft_strncmp(tokens[0], "EA", 3) == 0 && !data->texture_ea)
+		data->texture_ea = ft_strtrim(tokens[1], "\n");
+	else if (ft_strncmp(tokens[0], "F", 2) == 0 && data->f_rgb[0] == -1)
 		parse_colors_F(tokens[1], data);
-	else if (ft_strncmp(tokens[0], "C", 2) == 0 && data->C_rgb[0] == -1)
+	else if (ft_strncmp(tokens[0], "C", 2) == 0 && data->c_rgb[0] == -1)
 		parse_colors_C(tokens[1], data);
 	else
 	{
@@ -67,11 +67,11 @@ void	parse_colors_C(char *rgb_str, t_parse_map *data)
 	i = 0;
 	while (i < 3)
 	{
-		data->C_rgb[i] = ft_atoi(rgb_val[i]);
-		if (data->C_rgb[i] < 0 || data->C_rgb[i] > 255)
+		data->c_rgb[i] = ft_atoi(rgb_val[i]);
+		if (data->c_rgb[i] < 0 || data->c_rgb[i] > 255)
 		{
 			printf("Error: color value valid is 0-255.\n");
-			data->C_rgb[0] = -1;
+			data->c_rgb[0] = -1;
 			break ;
 		}
 		i++;
@@ -95,11 +95,11 @@ void	parse_colors_F(char *rgb_str, t_parse_map *data)
 	i = 0;
 	while (i < 3)
 	{
-		data->F_rgb[i] = ft_atoi(rgb_val[i]);
-		if (data->F_rgb[i] < 0 || data->F_rgb[i] > 255)
+		data->f_rgb[i] = ft_atoi(rgb_val[i]);
+		if (data->f_rgb[i] < 0 || data->f_rgb[i] > 255)
 		{
 			printf("Error: color value valid is 0-255.\n");
-			data->F_rgb[0] = -1;
+			data->f_rgb[0] = -1;
 			break ;
 		}
 		i++;

@@ -59,12 +59,13 @@ int	key_release(int keycode, t_game *game)
 
 void	move_player(t_player *player, char **map)
 {
-	float angle_speed = 0.05;
-	float new_x;
-	float new_y;
-	float cos_angle;
-	float sin_angle;
+	float	angle_speed;
+	float	new_x;
+	float	new_y;
+	float	cos_angle;
+	float	sin_angle;
 
+	angle_speed = 0.05;
 	if (player->left_rotate)
 		player->angle -= angle_speed;
 	if (player->right_rotate)

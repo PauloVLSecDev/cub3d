@@ -3,7 +3,7 @@
 
 void	free_map(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!map)
@@ -18,10 +18,10 @@ void	free_map(char **map)
 
 void	free_game_data(t_game *game)
 {
-	free(game->map_data.Texture_NO);
-	free(game->map_data.Texture_SO);
-	free(game->map_data.Texture_WE);
-	free(game->map_data.Texture_EA);
+	free(game->map_data.texture_no);
+	free(game->map_data.texture_so);
+	free(game->map_data.texture_we);
+	free(game->map_data.texture_ea);
 	free_map(game->map_data.map);
 }
 
@@ -60,8 +60,8 @@ int	extencion_map(char *filename)
 
 int	num_player(char *line)
 {
-	int i;
-	int count_player;
+	int	i;
+	int	count_player;
 
 	i = 0;
 	count_player = 0;

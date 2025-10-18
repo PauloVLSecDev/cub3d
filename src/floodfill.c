@@ -33,16 +33,16 @@ int	flood_fill(char **map_copy, int y, int x, int map_height)
 		return (0);
 	if (flood_fill(map_copy, y + 1, x, map_height) == 0)
 		return (0);
-	if (flood_fill(map_copy, y - 1 , x, map_height) == 0)
+	if (flood_fill(map_copy, y - 1, x, map_height) == 0)
 		return (0);
 	return (1);
 }
 
-void	find_player(char **map_copy, t_parse_map *data, char *char_player) 
+void	find_player(char **map_copy, t_parse_map *data, char *char_player)
 {
-	int count_player;
-	int x;
-	int y;
+	int	count_player;
+	int	x;
+	int	y;
 
 	y = 0;
 	count_player = 0;
@@ -50,13 +50,13 @@ void	find_player(char **map_copy, t_parse_map *data, char *char_player)
 	{
 		x = 0;
 		while (map_copy[y][x] != '\0')
-		{ 
+		{
 			if (ft_strchr(char_player, map_copy[y][x]))
 			{
-					data->vision_player = map_copy[y][x];
-					data->initial_y = (float)y;
-					data->initial_x = (float)x;
-					count_player++;
+				data->vision_player = map_copy[y][x];
+				data->initial_y = (float)y;
+				data->initial_x = (float)x;
+				count_player++;
 			}
 			x++;
 		}
@@ -64,13 +64,8 @@ void	find_player(char **map_copy, t_parse_map *data, char *char_player)
 	}
 	if (count_player != 1)
 	{
-		printf("error \n"); 
-		free_array(map_copy);			
+		printf("error \n");
+		free_array(map_copy);
 		exit(1);
 	}
 }
-
-
-
-
-
