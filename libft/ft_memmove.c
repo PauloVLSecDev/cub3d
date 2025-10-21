@@ -19,8 +19,8 @@ void	*ft_memmove(void *dest, void *str, size_t len)
 	size_t				i;
 
 	i = 0;
-	temp_d = (unsigned char *) dest;
-	temp_s = (const unsigned char *) str;
+	temp_d = (unsigned char *)dest;
+	temp_s = (const unsigned char *)str;
 	if (temp_d == NULL && temp_s == NULL)
 		return (NULL);
 	if ((temp_d > temp_s) && temp_d < (temp_s + len))

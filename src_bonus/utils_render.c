@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   utils_render.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 14:22:00 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/10/22 14:12:26 by pvitor-l         ###   ########.fr       */
+/*   Created: 2025/10/21 18:01:20 by yurivieirad       #+#    #+#             */
+/*   Updated: 2025/10/21 18:53:25 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/cub3d_bonus.h"
 
-void	ft_bzero(void *s, size_t n)
+int	rgb_to_int(int r, int g, int b)
 {
-	char	*temp;
-
-	temp = (char *)s;
-	while (n > 0)
-	{
-		*(temp++) = 0;
-		n--;
-	}
+	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }

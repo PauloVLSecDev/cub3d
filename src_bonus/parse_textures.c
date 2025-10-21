@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:06 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/21 18:04:13 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/21 18:53:15 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 int	all_configs_loaded(t_parse_map *data)
 {

@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:49:56 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:50:20 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/21 18:51:15 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 void	put_pixel(int x, int y, int color, t_game *game)
 {
@@ -100,6 +100,8 @@ int	render_loop(t_game *game)
 {
 	move_player(&game->player, game->map_data.map);
 	raycasting(game);
+	draw_minimap(game);
+	draw_player_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	return (0);
 }

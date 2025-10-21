@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 01:09:09 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:03:50 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/21 18:52:54 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 int	is_valid_map_line(char *line)
 {

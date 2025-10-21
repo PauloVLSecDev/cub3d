@@ -6,14 +6,14 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:35:00 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/09 18:32:39 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/21 19:11:47 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KETCAPS_H
 # define KETCAPS_H
 
-#include "cub3d.h"
+// #include "cub3d.h"
 
 # define P_NORTH 'N'
 # define P_SOUTH 'S'

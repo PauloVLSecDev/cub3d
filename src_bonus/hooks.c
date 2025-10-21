@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:21:17 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:03:47 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/21 18:52:45 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 int	exit_program(t_game *game)
 {
