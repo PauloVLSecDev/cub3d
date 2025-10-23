@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:06 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/17 15:44:38 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:53:15 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
-			
-static int	get_texture(char **tokens, t_parse_map *data);
-			
 int	all_configs_loaded(t_parse_map *data)
 {
 	if (data->texture_no && data->texture_so && data->texture_we
@@ -34,8 +31,23 @@ void	parse_config_line(char *line, t_parse_map *data)
 			free_array(tokens);
 		return ;
 	}
-	if (!get_texture(tokens, data))
-		free_textures(data);
+	if (ft_strncmp(tokens[0], "NO", 3) == 0 && !data->texture_no)
+		data->texture_no = ft_strtrim(tokens[1], "\n");
+	else if (ft_strncmp(tokens[0], "SO", 3) == 0 && !data->texture_so)
+		data->texture_so = ft_strtrim(tokens[1], "\n");
+	else if (ft_strncmp(tokens[0], "WE", 3) == 0 && !data->texture_we)
+		data->texture_we = ft_strtrim(tokens[1], "\n");
+	else if (ft_strncmp(tokens[0], "EA", 3) == 0 && !data->texture_ea)
+		data->texture_ea = ft_strtrim(tokens[1], "\n");
+	else if (ft_strncmp(tokens[0], "F", 2) == 0 && data->f_rgb[0] == -1)
+		parse_colors_f(tokens[1], data);
+	else if (ft_strncmp(tokens[0], "C", 2) == 0 && data->c_rgb[0] == -1)
+		parse_colors_c(tokens[1], data);
+	else
+	{
+		if (!all_configs_loaded(data))
+			printf("Error: line invalid : %s\n", line);
+	}
 	free_array(tokens);
 }
 
@@ -94,30 +106,3 @@ void	parse_colors_f(char *rgb_str, t_parse_map *data)
 	}
 	free_array(rgb_val);
 }
-
-static int	get_texture(char **tokens, t_parse_map *data)
-{
-
-	if (ft_strncmp(tokens[0], "NO", 3) == 0 && !data->texture_no)
-		data->texture_no = ft_strtrim(tokens[1], "\n");
-	else if (ft_strncmp(tokens[0], "SO", 3) == 0 && !data->texture_so)
-		data->texture_so = ft_strtrim(tokens[1], "\n");
-	else if (ft_strncmp(tokens[0], "WE", 3) == 0 && !data->texture_we)
-		data->texture_we = ft_strtrim(tokens[1], "\n");
-	else if (ft_strncmp(tokens[0], "EA", 3) == 0 && !data->texture_ea)
-		data->texture_ea = ft_strtrim(tokens[1], "\n");
-	else if (ft_strncmp(tokens[0], "F", 2) == 0 && data->f_rgb[0] == -1)
-		parse_colors_f(tokens[1], data);
-	else if (ft_strncmp(tokens[0], "C", 2) == 0 && data->c_rgb[0] == -1)
-		parse_colors_c(tokens[1], data);
-	else
-	{
-		if (!all_configs_loaded(data))
-		{
-			printf("Error: line invalid :\n");
-			return (0);
-		}
-	}
-	return (1);
-}
-

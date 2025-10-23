@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/17 17:33:48 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:53:01 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 static void	get_largest_line(t_parse_map *data);
 static void	convert_list_to_map(t_parse_map *data);

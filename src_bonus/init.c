@@ -1,16 +1,16 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/* init.c                                             :+:      :+:    :+:     */
-/*                                                    +:+ +:+         +:+     */
-/* By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+          */
-/*                                                +#+#+#+#+#+   +#+           */
-/* Created: 2025/09/18 17:20:27 by yurivieirad       #+#    #+#               */
-/* Updated: 2025/09/18 22:37:35 by yurivieirad      ###   ########.fr         */
-/*                                                                            */
+/* */
+/* :::      ::::::::   */
+/* init.c                                             :+:      :+:    :+:   */
+/* +:+ +:+         +:+     */
+/* By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/* +#+#+#+#+#+   +#+           */
+/* Created: 2025/09/18 17:20:27 by yurivieirad       #+#    #+#             */
+/* Updated: 2025/09/18 22:37:35 by yurivieirad      ###   ########.fr       */
+/* */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 static void	find_and_set_player_start(t_game *game)
 {

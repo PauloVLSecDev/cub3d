@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   floodfill.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:45:11 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/17 17:35:54 by pvitor-l         ###   ########.fr       */
-/*                                                +#+#+#+#+#+   +#+           */
+/*   Updated: 2025/10/21 18:52:06 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 int	flood_fill(char **map_copy, int y, int x, int map_height)
 {
@@ -65,8 +64,8 @@ void	find_player(char **map_copy, t_parse_map *data, char *char_player)
 	}
 	if (count_player != 1)
 	{
-		printf("error \n"); 
-		free_array(map_copy);			
+		printf("error \n");
+		free_array(map_copy);
 		exit(1);
 	}
 }

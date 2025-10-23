@@ -10,8 +10,8 @@
 /* */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
@@ -24,6 +24,9 @@
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1080
 
+# define MINIMAP_VIEW_WIDTH 10
+# define MINIMAP_VIEW_HEIGHT 10
+
 # define MOVE_SPEED 3
 # define BLOCK_SIZE 64
 # define PLAYER_SIZE 16
@@ -35,6 +38,15 @@ typedef struct s_point
 	int	x;
 	int	y;
 }	t_point;
+
+typedef struct s_minimap
+{
+	int	mini_block_size;
+	int	player_map_x;
+	int	player_map_y;
+	int	map_start_x;
+	int	map_start_y;
+}		t_minimap;
 
 typedef struct s_list
 {
@@ -71,7 +83,7 @@ typedef struct s_parse_map
 	char	*file_path;
 	int		map_size;
 
-}			t_parse_map;
+} 			t_parse_map;
 
 typedef struct s_player
 {
@@ -132,6 +144,7 @@ typedef struct s_game
 	int			map_height;
 	int			map_width;
 	t_player	player;
+	t_minimap	minimap;
 	char		**map;
 	int			floor_color;
 	int			ceiling_color;
@@ -140,6 +153,9 @@ typedef struct s_game
 }	t_game;
 
 // --- Functions ---
+
+void	draw_minimap(t_game *game);
+void	draw_player_minimap(t_game *game);
 
 // init.c
 void	init_game(t_game *game);

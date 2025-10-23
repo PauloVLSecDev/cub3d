@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 01:09:09 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/17 16:45:22 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:52:54 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 int	is_valid_map_line(char *line)
 {
@@ -59,6 +59,41 @@ void	init_data(t_parse_map *data)
 	data->map_size = 0;
 	data->map_start_line = -1;
 	data->map = NULL;
+}
+
+void	parse_map_file(int fd, t_parse_map *data)
+{
+	char	*line;
+	int		line_num;
+
+	line_num = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		line_num++;
+		if (line_is_empty(line))
+		{
+			free(line);
+			line = get_next_line(fd);
+			continue ;
+		}
+		if (!all_configs_loaded(data))
+			parse_config_line(line, data);
+		else
+		{
+			if (data->map_start_line == -1)
+			{
+				data->map_start_line = line_num;
+				valid_map(data, line, fd);
+				free(line);
+				return ;
+			}
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (!all_configs_loaded(data))
+		printf("Error: map\n");
 }
 
 int	main(int argc, char *argv[])

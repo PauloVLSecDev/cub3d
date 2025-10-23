@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:21:17 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/17 16:07:43 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:52:45 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 int	exit_program(t_game *game)
 {
@@ -54,4 +54,3 @@ int	key_release(int keycode, t_game *game)
 		game->player.right_rotate = false;
 	return (0);
 }
-
