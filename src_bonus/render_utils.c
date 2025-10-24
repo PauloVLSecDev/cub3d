@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:46:23 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:04:18 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/24 16:29:34 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 void	init_ray(t_ray *ray, t_player *player, int x)
 {

@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:09:41 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:04:07 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/24 16:30:35 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 void	calculate_step_and_side_dist(t_ray *ray, t_player *player)
 {

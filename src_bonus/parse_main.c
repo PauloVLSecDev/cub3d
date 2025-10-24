@@ -6,11 +6,11 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:26:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/23 18:58:04 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/24 16:30:10 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 static int	process_parsing_line(char *line, int line_num, t_parse_map *data,
 				int fd);

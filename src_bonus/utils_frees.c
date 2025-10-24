@@ -6,11 +6,11 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 19:43:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/23 19:48:18 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/24 16:27:57 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 void	close_all(void)
 {

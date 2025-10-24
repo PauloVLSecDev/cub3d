@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:58:08 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/23 20:03:53 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/24 16:31:19 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 void	map_size_list(t_parse_map *data)
 {

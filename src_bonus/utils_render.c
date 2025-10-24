@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 18:01:20 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:04:23 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/24 16:28:23 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 int	rgb_to_int(int r, int g, int b)
 {
