@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   func_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/17 19:42:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/17 21:26:01 by pvitor-l         ###   ########.fr       */
-=======
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:42:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/23 18:42:15 by pvitor-l         ###   ########.fr       */
->>>>>>> developer
+/*   Updated: 2025/10/24 16:32:31 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 t_list	*create_node(char *content)
 {

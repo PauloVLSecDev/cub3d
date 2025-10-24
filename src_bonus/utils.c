@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:20:37 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/23 19:42:44 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/24 16:27:30 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 void	free_map(char **map)
 {

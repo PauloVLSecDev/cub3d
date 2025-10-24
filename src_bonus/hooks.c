@@ -6,14 +6,13 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:21:17 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/17 16:07:43 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/24 16:32:00 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
-int	exit_program(t_game *game)
-{
+int	exit_program(t_game *game) {
 	free_game_data(game);
 	exit(0);
 	return (0);
