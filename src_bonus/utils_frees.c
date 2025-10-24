@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_render.c                                     :+:      :+:    :+:   */
+/*   utils_frees.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/21 18:01:20 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:04:23 by yurivieirad      ###   ########.fr       */
+/*   Created: 2025/10/23 19:43:35 by pvitor-l          #+#    #+#             */
+/*   Updated: 2025/10/23 19:48:18 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
-int	rgb_to_int(int r, int g, int b)
+void	close_all(void)
 {
-	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
+	int	i;
+
+	i = 3;
+	while (i < 1024)
+	{
+		close(i);
+		i++;
+	}
 }

@@ -1,11 +1,11 @@
+F 76,26,76
+F 76,26,76
+C 254,255,113
 
 NO assets/img2.xpm
 SO assets/img.xpm
 WE assets/brick.xpm
 EA assets/img3.xpm
-
-F 76,26,76
-C 254,255,113
 
     111111111111111
 111111000111111

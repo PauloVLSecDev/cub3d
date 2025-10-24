@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:42:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/21 18:52:17 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/23 18:42:15 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d_bonus.h"
+#include "../inc/cub3d.h"
 
 t_list	*create_node(char *content)
 {
@@ -53,6 +53,7 @@ void	free_struct(t_parse_map *data, char *menssage)
 
 	if (!data)
 		return ;
+	free_textures(data);
 	tmp = data->list;
 	while (tmp)
 	{
@@ -81,5 +82,31 @@ void	free_list(t_list **head)
 			free((*head)->line);
 		free(*head);
 		*head = tmp;
+	}
+}
+
+void	free_textures(t_parse_map *data)
+{
+	if (!data)
+		return ;
+	if (data->texture_no)
+	{
+		free(data->texture_no);
+		data->texture_no = NULL;
+	}
+	if (data->texture_so)
+	{
+		free(data->texture_so);
+		data->texture_so = NULL;
+	}
+	if (data->texture_we)
+	{
+		free(data->texture_we);
+		data->texture_we = NULL;
+	}
+	if (data->texture_ea)
+	{
+		free(data->texture_ea);
+		data->texture_ea = NULL;
 	}
 }

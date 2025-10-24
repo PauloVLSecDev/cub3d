@@ -6,7 +6,7 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:42:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/21 18:03:40 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/23 18:42:15 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	free_struct(t_parse_map *data, char *menssage)
 
 	if (!data)
 		return ;
+	free_textures(data);
 	tmp = data->list;
 	while (tmp)
 	{
@@ -92,7 +93,7 @@ void	free_textures(t_parse_map *data)
 	{
 		free(data->texture_no);
 		data->texture_no = NULL;
-	}	
+	}
 	if (data->texture_so)
 	{
 		free(data->texture_so);

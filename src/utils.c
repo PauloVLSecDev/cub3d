@@ -6,7 +6,7 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:20:37 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:04:27 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/23 19:42:44 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void	free_game_data(t_game *game)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
+	free_textures(&game->map_data);
 	free_map(game->map_data.map);
+	close_all();
 }
 
 void	trim_newline(char *str)
@@ -75,8 +77,8 @@ int	extencion_map(char *filename)
 	while (filename[i] != '\0' && valid == 0)
 	{
 		if ((filename[i] == '.' && filename[i + 1] == 'c') && (filename[i
-					+ 2] == 'u' && filename[i + 3] == 'b') && (filename[i
-					+ 4] == '\0'))
+				+ 2] == 'u' && filename[i + 3] == 'b') && (filename[i
+				+ 4] == '\0'))
 			valid += 1;
 		i++;
 	}
@@ -92,8 +94,8 @@ int	num_player(char *line)
 	count_player = 0;
 	while (line[i] || line[i] != '\n')
 	{
-		if (!ft_isalpha(line[i]) && line[i + 1] == P_SOUTH
-			&& !ft_isalpha(line[i + 2]))
+		if (!ft_isalpha(line[i]) && line[i + 1] == P_SOUTH && !ft_isalpha(line[i
+				+ 2]))
 			return (count_player += 1);
 		else if (!ft_isalpha(line[i]) && line[i + 1] == P_NORTH
 			&& !ft_isalpha(line[i + 2]))

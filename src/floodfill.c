@@ -6,12 +6,15 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:45:11 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/17 17:35:54 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/23 16:35:09 by pvitor-l         ###   ########.fr       */
 /*                                                +#+#+#+#+#+   +#+           */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+static void	only_one_player(char **map_copy, t_parse_map *data,
+				int count_player);
 
 int	flood_fill(char **map_copy, int y, int x, int map_height)
 {
@@ -63,10 +66,18 @@ void	find_player(char **map_copy, t_parse_map *data, char *char_player)
 		}
 		y++;
 	}
+	only_one_player(map_copy, data, count_player);
+}
+
+static void	only_one_player(char **map_copy, t_parse_map *data,
+		int count_player)
+{
 	if (count_player != 1)
 	{
-		printf("error \n"); 
-		free_array(map_copy);			
+		printf("error many players\n");
+		free_array(map_copy);
+		free_textures(data);
+		free_struct(data, "");
 		exit(1);
 	}
 }

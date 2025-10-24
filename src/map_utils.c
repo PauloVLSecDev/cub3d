@@ -6,7 +6,7 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:58:08 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/21 18:03:56 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/23 20:03:53 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	little_validade(t_parse_map *data, char *current_line)
 {
 	if (!is_valid_map_line(current_line))
 	{
+		free_list(&data->list);
 		free_struct(data, "line invalid");
+		free(current_line);
+		close_all();
 		exit(1);
 	}
 }

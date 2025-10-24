@@ -6,7 +6,7 @@
 #    By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/15 01:01:06 by yurivieirad       #+#    #+#              #
-#    Updated: 2025/10/16 19:02:39 by pvitor-l         ###   ########.fr        #
+#    Updated: 2025/10/23 19:46:24 by pvitor-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ FILES =	$(SRC_DIR)/floodfill.c \
 		$(SRC_DIR)/utils_render.c \
 		$(SRC_DIR)/utils_tex.c \
 		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/utils_frees.c \
 		$(SRC_DIR)/parse_main.c 
 
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(FILES))

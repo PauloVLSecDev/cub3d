@@ -6,11 +6,11 @@
 /*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 01:09:09 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:52:54 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/23 20:48:18 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d_bonus.h"
+#include "../inc/cub3d.h"
 
 int	is_valid_map_line(char *line)
 {
@@ -61,41 +61,6 @@ void	init_data(t_parse_map *data)
 	data->map = NULL;
 }
 
-void	parse_map_file(int fd, t_parse_map *data)
-{
-	char	*line;
-	int		line_num;
-
-	line_num = 0;
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		line_num++;
-		if (line_is_empty(line))
-		{
-			free(line);
-			line = get_next_line(fd);
-			continue ;
-		}
-		if (!all_configs_loaded(data))
-			parse_config_line(line, data);
-		else
-		{
-			if (data->map_start_line == -1)
-			{
-				data->map_start_line = line_num;
-				valid_map(data, line, fd);
-				free(line);
-				return ;
-			}
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
-	if (!all_configs_loaded(data))
-		printf("Error: map\n");
-}
-
 int	main(int argc, char *argv[])
 {
 	t_game	game;
@@ -105,7 +70,10 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		if (!extencion_map(argv[1]))
-			printf("invalid extension");
+		{
+			printf("invalid extensio\n");
+			return (0);
+		}
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 			printf("%s invalid file \n", argv[1]);
@@ -113,14 +81,13 @@ int	main(int argc, char *argv[])
 		{
 			init_data(&game.map_data);
 			game.map_data.file_path = argv[1];
-			parse_map_file(fd, &game.map_data);
+			if (parse_map_file(fd, &game.map_data) == 0)
+				init_win(&game);
+			else
+				close(fd);
 		}
 	}
 	else
-	{
 		printf("Arguments Error: insert: maps/map_name.cub\n");
-		exit(1);
-	}
-	init_win(&game);
 	return (0);
 }

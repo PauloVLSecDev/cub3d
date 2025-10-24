@@ -42,11 +42,11 @@ void	init_ray(t_ray *ray, t_player *player, int x)
 static void	calculate_wall_projection(t_ray *ray, t_game *game)
 {
 	if (ray->side == 0)
-		ray->perp_wall_dist = (ray->map_x - game->player.x / BLOCK_SIZE + \
-			(1 - ray->step_x) / 2) / ray->ray_dir_x;
+		ray->perp_wall_dist = (ray->map_x - game->player.x / BLOCK_SIZE + (1
+					- ray->step_x) / 2) / ray->ray_dir_x;
 	else
-		ray->perp_wall_dist = (ray->map_y - game->player.y / BLOCK_SIZE + \
-			(1 - ray->step_y) / 2) / ray->ray_dir_y;
+		ray->perp_wall_dist = (ray->map_y - game->player.y / BLOCK_SIZE + (1
+					- ray->step_y) / 2) / ray->ray_dir_y;
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2;
 	if (ray->draw_start < 0)
@@ -59,10 +59,10 @@ static void	calculate_wall_projection(t_ray *ray, t_game *game)
 static void	calculate_texture_x(t_ray *ray, t_game *game)
 {
 	if (ray->side == 0)
-		ray->wall_x = game->player.y / BLOCK_SIZE + ray->perp_wall_dist \
+		ray->wall_x = game->player.y / BLOCK_SIZE + ray->perp_wall_dist
 			* ray->ray_dir_y;
 	else
-		ray->wall_x = game->player.x / BLOCK_SIZE + ray->perp_wall_dist \
+		ray->wall_x = game->player.x / BLOCK_SIZE + ray->perp_wall_dist
 			* ray->ray_dir_x;
 	ray->wall_x -= floor(ray->wall_x);
 	ray->tex_x = (int)(ray->wall_x * (double)game->textures[ray->side].width);

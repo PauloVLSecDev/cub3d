@@ -54,4 +54,3 @@ int	key_release(int keycode, t_game *game)
 		game->player.right_rotate = false;
 	return (0);
 }
-
