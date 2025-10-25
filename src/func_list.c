@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:42:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/17 21:26:01 by pvitor-l         ###   ########.fr       */
-=======
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/17 19:42:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/23 18:42:15 by pvitor-l         ###   ########.fr       */
->>>>>>> developer
+/*   Updated: 2025/10/24 17:43:29 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +48,22 @@ void	ft_lsadd_back(t_list **head, t_list *new)
 
 void	free_struct(t_parse_map *data, char *menssage)
 {
-	t_list	*tmp;
-	t_list	*next;
-
 	if (!data)
 		return ;
 	free_textures(data);
-	tmp = data->list;
-	while (tmp)
+	if (data->list)
 	{
-		next = tmp->next;
-		if (tmp->line)
-			free(tmp->line);
-		free(tmp);
-		tmp = next;
+		free_list(&data->list);
+		data->list = NULL;
 	}
-	data->list = NULL;
 	if (data->map)
+	{
 		free_array(data->map);
-	printf("%s", menssage);
+		data->map = NULL;
+	}
+	get_next_line(-1);
+	if (menssage)
+		printf("%s", menssage);
 }
 
 void	free_list(t_list **head)
@@ -90,6 +80,7 @@ void	free_list(t_list **head)
 		free(*head);
 		*head = tmp;
 	}
+	*head = NULL;
 }
 
 void	free_textures(t_parse_map *data)

@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 01:09:09 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/23 20:48:18 by pvitor-l         ###   ########.fr       */
+/*   Created: 2025/10/24 20:55:12 by pvitor-l          #+#    #+#             */
+/*   Updated: 2025/10/24 21:10:07 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+static void	init_main(int fd, char *filename, t_game game);
+
+static void	init_main(int fd, char *filename, t_game game)
+{
+	if (!extencion_map(filename))
+	{
+		printf("invalid extensio\n");
+		return ;
+	}
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		printf("%s invalid file \n", filename);
+	else
+	{
+		init_data(&game.map_data);
+		game.map_data.file_path = filename;
+		if (parse_map_file(fd, &game.map_data) == 0)
+			init_win(&game);
+		else
+			close(fd);
+		get_next_line(-1);
+	}
+}
 
 int	is_valid_map_line(char *line)
 {
@@ -59,6 +83,7 @@ void	init_data(t_parse_map *data)
 	data->map_size = 0;
 	data->map_start_line = -1;
 	data->map = NULL;
+	data->file_path = NULL;
 }
 
 int	main(int argc, char *argv[])
@@ -66,26 +91,11 @@ int	main(int argc, char *argv[])
 	t_game	game;
 	int		fd;
 
+	fd = 0;
 	ft_bzero(&game, sizeof(t_game));
 	if (argc == 2)
 	{
-		if (!extencion_map(argv[1]))
-		{
-			printf("invalid extensio\n");
-			return (0);
-		}
-		fd = open(argv[1], O_RDONLY);
-		if (fd == -1)
-			printf("%s invalid file \n", argv[1]);
-		else
-		{
-			init_data(&game.map_data);
-			game.map_data.file_path = argv[1];
-			if (parse_map_file(fd, &game.map_data) == 0)
-				init_win(&game);
-			else
-				close(fd);
-		}
+		init_main(fd, argv[1], game);
 	}
 	else
 		printf("Arguments Error: insert: maps/map_name.cub\n");

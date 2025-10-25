@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:26:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/23 18:58:04 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/24 21:05:24 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	parse_map_file(int fd, t_parse_map *data)
 		line_num++;
 		status = process_parsing_line(line, line_num, data, fd);
 		if (status == 0)
-			return (free(line), status);
+			return (status);
 		else if (status == -1)
 		{
 			free(line);
@@ -63,6 +63,7 @@ int	parse_map_file(int fd, t_parse_map *data)
 	if (!all_configs_loaded(data))
 	{
 		free_struct(data, "");
+		get_next_line(-1);
 		return (status);
 	}
 	return (0);

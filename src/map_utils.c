@@ -35,6 +35,7 @@ void	little_validade(t_parse_map *data, char *current_line)
 		free_list(&data->list);
 		free_struct(data, "line invalid");
 		free(current_line);
+		get_next_line(-1);
 		close_all();
 		exit(1);
 	}

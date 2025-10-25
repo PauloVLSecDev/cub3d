@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/17 21:31:50 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:45:27 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	valid_map(t_parse_map *data, char *first_line, int fd)
 	{
 		little_validade(data, first_line);
 		ft_lsadd_back(&map_lines, create_node(first_line));
+		free(first_line);
 	}
 	while (true)
 	{
@@ -62,6 +63,8 @@ static void	convert_list_to_map(t_parse_map *data)
 	{
 		free_array(map_copy);
 		free_struct(data, "");
+		get_next_line(-1);
+		close_all();
 		exit(1);
 	}
 	data->map = trim_map(map_copy, data->map_size);
