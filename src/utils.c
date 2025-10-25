@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:20:37 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/24 20:45:17 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/24 21:20:59 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int	extencion_map(char *filename)
 		return (valid);
 	while (filename[i] != '\0' && valid == 0)
 	{
-		if ((filename[i] == '.' && filename[i + 1] == 'c') && (filename[i
-				+ 2] == 'u' && filename[i + 3] == 'b') && (filename[i
-				+ 4] == '\0'))
+		if ((filename[i] == '.' && filename[i + 1] == 'c') && (filename
+				[i + 2] == 'u' && filename[i + 3] == 'b') && (filename
+				[i + 4] == '\0'))
 			valid += 1;
 		i++;
 	}
@@ -94,8 +94,8 @@ int	num_player(char *line)
 	count_player = 0;
 	while (line[i] || line[i] != '\n')
 	{
-		if (!ft_isalpha(line[i]) && line[i + 1] == P_SOUTH && !ft_isalpha(line[i
-				+ 2]))
+		if (!ft_isalpha(line[i]) && line[i + 1] == P_SOUTH && !ft_isalpha(line
+				[i + 2]))
 			return (count_player += 1);
 		else if (!ft_isalpha(line[i]) && line[i + 1] == P_NORTH
 			&& !ft_isalpha(line[i + 2]))
