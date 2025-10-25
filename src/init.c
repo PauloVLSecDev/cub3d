@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:28:12 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 21:46:08 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:26:13 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ void	init_game(t_game *game)
 
 int	init_win(t_game *game)
 {
+	if (validate_textures(game))
+	{
+		free_textures(&game->map_data);
+		free_map(game->map_data.map);
+		exit(1);
+	}
 	init_game(game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:28:12 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 16:26:44 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:45:19 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_game(t_game *game)
 {
 	game->map = game->map_data.map;
 	game->map_height = game->map_data.map_size;
+	load_textures(game);
 	if (game->map_height > 0 && game->map[0])
 		game->map_width = ft_strlen(game->map[0]);
 	else
@@ -60,7 +61,6 @@ void	init_game(t_game *game)
 	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
 			&game->endian);
-	load_textures(game);
 	game->floor_color = rgb_to_int(game->map_data.c_rgb[0],
 			game->map_data.c_rgb[1], game->map_data.c_rgb[2]);
 	game->ceiling_color = rgb_to_int(game->map_data.f_rgb[0],

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:39:15 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/23 21:04:46 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:20:28 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1080
 
-# define MOVE_SPEED 3
+# define MOVE_SPEED 2
 # define BLOCK_SIZE 64
 # define PLAYER_SIZE 16
 # define PI 3.14159265359
@@ -188,6 +188,9 @@ void				find_player(char **map_copy, t_parse_map *data,
 						char *char_player);
 int					flood_fill(char **map_copy, int y, int x, int map_height);
 void				load_textures(t_game *game);
+int					validate_textures(t_game *game);
+int					validate_texture_extension(const char *filename);
+
 
 void				free_list(t_list **head);
 void				free_struct(t_parse_map *data, char *menssage);

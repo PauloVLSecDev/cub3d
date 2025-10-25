@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 20:55:12 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 21:10:07 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:17:24 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@ int	main(int argc, char *argv[])
 	}
 	else
 		printf("Arguments Error: insert: maps/map_name.cub\n");
+
+	free_game_data(&game);
 	return (0);
 }
