@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 13:57:10 by yvieira-          #+#    #+#             */
-/*   Updated: 2025/10/26 14:05:47 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:23:25 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_minimap
 
 typedef struct s_list
 {
-	char *line;
-	struct s_list *next;
+	char			*line;
+	struct s_list	*next;
 
 }		t_list;
 
@@ -65,25 +65,25 @@ typedef struct s_image
 
 typedef struct s_parse_map
 {
-	int num_lines;
-	char vision_player;
-	float initial_y;
-	float initial_x;
-	char *texture_so;
-	char *texture_no;
-	char *texture_we;
-	char *texture_ea;
-	t_list *list;
-	int	w_texture;
-	int	f_rgb[3];
-	int	c_rgb[3];
-	int	map_start_line;
-	int	largest_line;
-	char **map;
+	int		num_lines;
+	char	vision_player;
+	float	initial_y;
+	float	initial_x;
+	char	*texture_so;
+	char	*texture_no;
+	char	*texture_we;
+	char	*texture_ea;
+	t_list	*list;
+	int		w_texture;
+	int		f_rgb[3];
+	int		c_rgb[3];
+	int		map_start_line;
+	int		largest_line;
+	char	**map;
 	char	*file_path;
 	int		map_size;
 
-} 			t_parse_map;
+}			t_parse_map;
 
 typedef struct s_player
 {

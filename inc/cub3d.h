@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:39:15 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/26 14:05:51 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/26 17:47:21 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_ray
 	int				draw_end;
 	double			wall_x;
 	int				tex_x;
+	int		tex_id;
 }					t_ray;
 
 typedef struct s_game
@@ -190,8 +191,6 @@ int					flood_fill(char **map_copy, int y, int x, int map_height);
 void				load_textures(t_game *game);
 int					validate_textures(t_game *game);
 int					validate_texture_extension(const char *filename);
-
-
 void				free_list(t_list **head);
 void				free_struct(t_parse_map *data, char *menssage);
 void				little_validade(t_parse_map *data, char *current_line);

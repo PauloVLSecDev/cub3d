@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 20:55:12 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/26 13:50:39 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:20:04 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	main(int argc, char *argv[])
 	}
 	else
 		printf("Arguments Error: insert: maps/map_name.cub\n");
-
 	free_game_data(&game);
 	return (0);
 }

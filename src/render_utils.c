@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:46:23 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:04:18 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/26 17:57:35 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	init_ray(t_ray *ray, t_player *player, int x)
 	else
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 	ray->hit = 0;
+	ray->side = 0;
+	ray->tex_id = 0;
 }
 
 static void	calculate_wall_projection(t_ray *ray, t_game *game)
@@ -65,11 +67,11 @@ static void	calculate_texture_x(t_ray *ray, t_game *game)
 		ray->wall_x = game->player.x / BLOCK_SIZE + ray->perp_wall_dist
 			* ray->ray_dir_x;
 	ray->wall_x -= floor(ray->wall_x);
-	ray->tex_x = (int)(ray->wall_x * (double)game->textures[ray->side].width);
+	ray->tex_x = (int)(ray->wall_x * (double)game->textures[ray->tex_id].width);
 	if (ray->side == 0 && ray->ray_dir_x > 0)
-		ray->tex_x = game->textures[ray->side].width - ray->tex_x - 1;
+		ray->tex_x = game->textures[ray->tex_id].width - ray->tex_x - 1;
 	if (ray->side == 1 && ray->ray_dir_y < 0)
-		ray->tex_x = game->textures[ray->side].width - ray->tex_x - 1;
+		ray->tex_x = game->textures[ray->tex_id].width - ray->tex_x - 1;
 }
 
 void	raycasting(t_game *game)

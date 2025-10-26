@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:28:12 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/26 13:50:36 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/26 16:27:11 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ void	init_game(t_game *game)
 	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
 			&game->endian);
 	load_textures(game);
-	game->floor_color = rgb_to_int(game->map_data.c_rgb[0],
-			game->map_data.c_rgb[1], game->map_data.c_rgb[2]);
-	game->ceiling_color = rgb_to_int(game->map_data.f_rgb[0],
+	game->floor_color = rgb_to_int(game->map_data.f_rgb[0],
 			game->map_data.f_rgb[1], game->map_data.f_rgb[2]);
+	game->ceiling_color = rgb_to_int(game->map_data.c_rgb[0],
+			game->map_data.c_rgb[1], game->map_data.c_rgb[2]);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 
