@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_render.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 18:01:20 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/24 16:28:23 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/26 13:51:12 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 int	rgb_to_int(int r, int g, int b)
 {

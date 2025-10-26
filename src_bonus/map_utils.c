@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:58:08 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 16:31:19 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/26 13:50:42 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	little_validade(t_parse_map *data, char *current_line)
 		free_list(&data->list);
 		free_struct(data, "line invalid");
 		free(current_line);
+		get_next_line(-1);
 		close_all();
 		exit(1);
 	}

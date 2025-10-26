@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:46:23 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/24 16:29:34 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/26 13:51:04 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

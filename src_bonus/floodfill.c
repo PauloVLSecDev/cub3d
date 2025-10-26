@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   floodfill.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:45:11 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 16:32:13 by pvitor-l         ###   ########.fr       */
-/*                                                +#+#+#+#+#+   +#+           */
+/*   Updated: 2025/10/26 13:50:20 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/cub3d_bonus.h"
 
@@ -76,8 +76,9 @@ static void	only_one_player(char **map_copy, t_parse_map *data,
 	{
 		printf("error many players\n");
 		free_array(map_copy);
-		free_textures(data);
 		free_struct(data, "");
+		get_next_line(-1);
+		close_all();
 		exit(1);
 	}
 }

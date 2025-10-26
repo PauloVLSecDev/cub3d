@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:39:15 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/25 18:20:28 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/26 14:05:51 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1080
 
-# define MOVE_SPEED 2
+# define MOVE_SPEED 1
 # define BLOCK_SIZE 64
 # define PLAYER_SIZE 16
 # define PI 3.14159265359

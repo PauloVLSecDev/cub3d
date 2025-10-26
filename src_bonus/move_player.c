@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:09:41 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/24 16:30:35 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:08:23 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	handle_rotation(t_player *player)
 {
 	float	angle_speed;
 
-	angle_speed = 0.05;
+	angle_speed = 0.01;
 	if (player->left_rotate)
 		player->angle -= angle_speed;
 	if (player->right_rotate)

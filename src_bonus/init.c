@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:28:12 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/25 17:45:19 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/26 13:50:36 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	init_game(t_game *game)
 {
 	game->map = game->map_data.map;
 	game->map_height = game->map_data.map_size;
-	load_textures(game);
 	if (game->map_height > 0 && game->map[0])
 		game->map_width = ft_strlen(game->map[0]);
 	else
@@ -61,6 +60,7 @@ void	init_game(t_game *game)
 	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
 			&game->endian);
+	load_textures(game);
 	game->floor_color = rgb_to_int(game->map_data.c_rgb[0],
 			game->map_data.c_rgb[1], game->map_data.c_rgb[2]);
 	game->ceiling_color = rgb_to_int(game->map_data.f_rgb[0],
@@ -70,6 +70,12 @@ void	init_game(t_game *game)
 
 int	init_win(t_game *game)
 {
+	if (validate_textures(game))
+	{
+		free_textures(&game->map_data);
+		free_map(game->map_data.map);
+		exit(1);
+	}
 	init_game(game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);

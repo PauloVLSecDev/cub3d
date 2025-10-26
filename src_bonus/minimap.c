@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:57:55 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/21 18:53:07 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/26 13:50:53 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

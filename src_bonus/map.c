@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 16:31:06 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/26 13:50:45 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 static void	get_largest_line(t_parse_map *data);
 static void	convert_list_to_map(t_parse_map *data);
 static char	**trim_map(char **map, int map_size);
+static void	valid_first_line(t_parse_map *data,
+				char *first_line, t_list **map_lines);
+
+static void	valid_first_line(t_parse_map *data,
+	char *first_line, t_list **map_lines)
+{
+	little_validade(data, first_line);
+	ft_lsadd_back(map_lines, create_node(first_line));
+	free(first_line);
+}
 
 void	valid_map(t_parse_map *data, char *first_line, int fd)
 {
@@ -23,10 +33,7 @@ void	valid_map(t_parse_map *data, char *first_line, int fd)
 
 	map_lines = NULL;
 	if (first_line)
-	{
-		little_validade(data, first_line);
-		ft_lsadd_back(&map_lines, create_node(first_line));
-	}
+		valid_first_line(data, first_line, &map_lines);
 	while (true)
 	{
 		current_line = get_next_line(fd);
@@ -62,6 +69,8 @@ static void	convert_list_to_map(t_parse_map *data)
 	{
 		free_array(map_copy);
 		free_struct(data, "");
+		get_next_line(-1);
+		close_all();
 		exit(1);
 	}
 	data->map = trim_map(map_copy, data->map_size);

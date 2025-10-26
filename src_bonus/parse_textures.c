@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:06 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 16:30:21 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/26 13:51:01 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	parse_config_line(char *line, t_parse_map *data)
 	}
 	if (!get_texture(tokens, data))
 	{
-		free_textures(data);
 		free_array(tokens);
 		free_struct(data, "invalid texture\n");
-		close_all();
 		free(line);
+		get_next_line(-1);
+		close_all();
 		exit(1);
 	}
 	free_array(tokens);

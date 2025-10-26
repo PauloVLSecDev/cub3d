@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:26:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 16:30:10 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/10/26 13:50:58 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 
 static int	process_parsing_line(char *line, int line_num, t_parse_map *data,
 				int fd);
+
+static int	false_configs_loaded(t_parse_map *data, int status)
+{
+	if (!all_configs_loaded(data))
+	{
+		free_struct(data, "");
+		get_next_line(-1);
+		return (status);
+	}
+	return (0);
+}
 
 static int	process_parsing_line(char *line, int line_num, t_parse_map *data,
 		int fd)
@@ -50,7 +61,7 @@ int	parse_map_file(int fd, t_parse_map *data)
 		line_num++;
 		status = process_parsing_line(line, line_num, data, fd);
 		if (status == 0)
-			return (free(line), status);
+			return (status);
 		else if (status == -1)
 		{
 			free(line);
@@ -61,9 +72,6 @@ int	parse_map_file(int fd, t_parse_map *data)
 		line = get_next_line(fd);
 	}
 	if (!all_configs_loaded(data))
-	{
-		free_struct(data, "");
-		return (status);
-	}
+		return (false_configs_loaded(data, status));
 	return (0);
 }

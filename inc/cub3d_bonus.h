@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 16:39:15 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 16:35:42 by pvitor-l         ###   ########.fr       */
+/*   Created: 2025/10/26 13:57:10 by yvieira-          #+#    #+#             */
+/*   Updated: 2025/10/26 14:05:47 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define MINIMAP_VIEW_WIDTH 10
 # define MINIMAP_VIEW_HEIGHT 10
 
-# define MOVE_SPEED 3
+# define MOVE_SPEED 1
 # define BLOCK_SIZE 64
 # define PLAYER_SIZE 16
 # define PI 3.14159265359
@@ -215,5 +215,6 @@ void				map_size_list(t_parse_map *data);
 char				**duplicate_map(t_parse_map *data);
 void				free_textures(t_parse_map *data);
 void				close_all(void);
+int					validate_textures(t_game *game);
 
 #endif
