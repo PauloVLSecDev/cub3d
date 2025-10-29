@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:39:15 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/26 17:47:21 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/29 21:49:30 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct s_ray
 	int				draw_end;
 	double			wall_x;
 	int				tex_x;
-	int		tex_id;
+	int				tex_id;
 }					t_ray;
 
 typedef struct s_game

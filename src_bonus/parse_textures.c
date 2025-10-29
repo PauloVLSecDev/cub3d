@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:06 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/26 13:51:01 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/29 22:39:05 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,13 @@ static int	get_texture(char **tokens, t_parse_map *data)
 	else if (ft_strncmp(tokens[0], "EA", 3) == 0 && !data->texture_ea)
 		data->texture_ea = ft_strtrim(tokens[1], "\n");
 	else if (ft_strncmp(tokens[0], "F", 2) == 0 && data->f_rgb[0] == -1)
+	{
 		parse_colors_f(tokens[1], data);
+	}
 	else if (ft_strncmp(tokens[0], "C", 2) == 0 && data->c_rgb[0] == -1)
+	{
 		parse_colors_c(tokens[1], data);
+	}
 	else
 	{
 		if (!all_configs_loaded(data))

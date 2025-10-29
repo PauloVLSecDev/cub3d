@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:28:12 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/26 17:32:46 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/29 21:46:37 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,13 @@ int	init_win(t_game *game)
 	mlx_hook(game->win, 17, 0, exit_program, game);
 	mlx_loop_hook(game->mlx, render_loop, game);
 	mlx_loop(game->mlx);
+	return (0);
+}
+
+int	render_loop(t_game *game)
+{
+	move_player(&game->player, game->map_data.map);
+	raycasting(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	return (0);
 }

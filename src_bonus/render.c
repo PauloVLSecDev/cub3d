@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:49:56 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/26 14:05:18 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/29 21:48:57 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,24 @@ void	draw_filled_square(t_point start, int size, int color, t_game *game)
 	}
 }
 
+static void	set_wall_texture(t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->ray_dir_x > 0)
+			ray->tex_id = 3;
+		else
+			ray->tex_id = 2;
+	}
+	else
+	{
+		if (ray->ray_dir_y > 0)
+			ray->tex_id = 1;
+		else
+			ray->tex_id = 0;
+	}
+}
+
 void	perform_dda(t_ray *ray, t_game *game)
 {
 	while (ray->hit == 0)
@@ -65,6 +83,7 @@ void	perform_dda(t_ray *ray, t_game *game)
 		else if (game->map[ray->map_y][ray->map_x] == '1')
 		{
 			ray->hit = 1;
+			set_wall_texture(ray);
 		}
 	}
 }
@@ -80,28 +99,18 @@ void	draw_vertical_line(t_game *game, t_ray *ray, int x)
 	y = 0;
 	while (y < ray->draw_start)
 		put_pixel(x, y++, game->ceiling_color, game);
-	step = 1.0 * game->textures[ray->side].height / ray->line_height;
+	step = 1.0 * game->textures[ray->tex_id].height / ray->line_height;
 	tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
 	while (y < ray->draw_end)
 	{
 		tex_y = (int)tex_pos;
 		tex_pos += step;
-		color = *(int *)(game->textures[ray->side].addr + (tex_y
-					* game->textures[ray->side].line_len + ray->tex_x
-					* (game->textures[ray->side].bpp / 8)));
+		color = *(int *)(game->textures[ray->tex_id].addr + (tex_y
+					* game->textures[ray->tex_id].line_len + ray->tex_x
+					* (game->textures[ray->tex_id].bpp / 8)));
 		put_pixel(x, y, color, game);
 		y++;
 	}
 	while (y < WIN_HEIGHT)
 		put_pixel(x, y++, game->floor_color, game);
-}
-
-int	render_loop(t_game *game)
-{
-	move_player(&game->player, game->map_data.map);
-	raycasting(game);
-	draw_minimap(game);
-	draw_player_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	return (0);
 }

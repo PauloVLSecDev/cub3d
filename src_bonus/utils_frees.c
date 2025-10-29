@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_frees.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 19:43:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/26 13:51:09 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/29 21:48:04 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:49:56 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/26 17:58:23 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/10/29 21:45:57 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,24 @@ void	draw_filled_square(t_point start, int size, int color, t_game *game)
 	}
 }
 
+static void	set_wall_texture(t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->ray_dir_x > 0)
+			ray->tex_id = 3;
+		else
+			ray->tex_id = 2;
+	}
+	else
+	{
+		if (ray->ray_dir_y > 0)
+			ray->tex_id = 1;
+		else
+			ray->tex_id = 0;
+	}
+}
+
 void	perform_dda(t_ray *ray, t_game *game)
 {
 	while (ray->hit == 0)
@@ -65,20 +83,7 @@ void	perform_dda(t_ray *ray, t_game *game)
 		else if (game->map[ray->map_y][ray->map_x] == '1')
 		{
 			ray->hit = 1;
-			if (ray->side == 0)
-			{
-				if (ray->ray_dir_x > 0)
-					ray->tex_id = 3;
-				else
-					ray->tex_id = 2;
-			}
-			else
-			{
-				if (ray->ray_dir_y > 0)
-					ray->tex_id = 1;
-				else
-					ray->tex_id = 0;
-			}
+			set_wall_texture(ray);
 		}
 	}
 }
@@ -108,12 +113,4 @@ void	draw_vertical_line(t_game *game, t_ray *ray, int x)
 	}
 	while (y < WIN_HEIGHT)
 		put_pixel(x, y++, game->floor_color, game);
-}
-
-int	render_loop(t_game *game)
-{
-	move_player(&game->player, game->map_data.map);
-	raycasting(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	return (0);
 }
