@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:39:15 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/29 21:49:30 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/11/01 16:05:02 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1080
 
-# define MOVE_SPEED 1
+# define MOVE_SPEED 3
 # define BLOCK_SIZE 64
 # define PLAYER_SIZE 16
 # define PI 3.14159265359
@@ -179,6 +179,7 @@ void				parse_colors_f(char *rgb_str, t_parse_map *data);
 void				parse_colors_c(char *rgb_str, t_parse_map *data);
 void				parse_config_line(char *line, t_parse_map *data);
 void				valid_map(t_parse_map *data, char *first_line, int fd);
+int					validate_textures(t_game *game);
 
 // utils
 void				free_map(char **map);
@@ -189,8 +190,7 @@ void				find_player(char **map_copy, t_parse_map *data,
 						char *char_player);
 int					flood_fill(char **map_copy, int y, int x, int map_height);
 void				load_textures(t_game *game);
-int					validate_textures(t_game *game);
-int					validate_texture_extension(const char *filename);
+
 void				free_list(t_list **head);
 void				free_struct(t_parse_map *data, char *menssage);
 void				little_validade(t_parse_map *data, char *current_line);
@@ -199,7 +199,9 @@ t_list				*create_node(char *content);
 void				map_size_list(t_parse_map *data);
 char				**duplicate_map(t_parse_map *data);
 void				free_textures(t_parse_map *data);
+void				valid_first_line(t_parse_map *data, char *first_line,
+					t_list **map_lines);
 void				close_all(void);
-void				valid_first_line(t_parse_map *data, char *first_line, t_list **map_lines);
+void				closed_map(char **map_copy, t_parse_map *data);
 
 #endif

@@ -17,39 +17,39 @@ static void	draw_minimap_tile(t_game *game, t_point screen_pos)
 	int	map_y;
 	int	map_x;
 
-	map_y = game->minimap.map_start_y + \
-		(screen_pos.y / game->minimap.mini_block_size);
-	map_x = game->minimap.map_start_x + \
-		(screen_pos.x / game->minimap.mini_block_size);
-	if (map_y >= 0 && map_y < game->map_height && \
-		map_x >= 0 && map_x < game->map_width)
+	map_y = game->minimap.map_start_y + (screen_pos.y
+			/ game->minimap.mini_block_size);
+	map_x = game->minimap.map_start_x + (screen_pos.x
+			/ game->minimap.mini_block_size);
+	if (map_y >= 0 && map_y < game->map_height && map_x >= 0
+		&& map_x < game->map_width)
 	{
 		if (game->map[map_y][map_x] == '1')
-			draw_filled_square(screen_pos, game->minimap.mini_block_size, \
+			draw_filled_square(screen_pos, game->minimap.mini_block_size,
 				0x808080, game);
 		else if (game->map[map_y][map_x] == 'F')
-			draw_filled_square(screen_pos, game->minimap.mini_block_size, \
+			draw_filled_square(screen_pos, game->minimap.mini_block_size,
 				0xC0C0C0, game);
 		else
-			draw_filled_square(screen_pos, game->minimap.mini_block_size, \
+			draw_filled_square(screen_pos, game->minimap.mini_block_size,
 				0x000000, game);
 	}
 	else
-		draw_filled_square(screen_pos, game->minimap.mini_block_size, \
-			0x303030, game);
+		draw_filled_square(screen_pos, game->minimap.mini_block_size, 0x303030,
+			game);
 }
 
 void	draw_minimap(t_game *game)
 {
-	t_point		screen_pos;
+	t_point	screen_pos;
 
 	game->minimap.mini_block_size = BLOCK_SIZE / 4;
 	game->minimap.player_map_x = game->player.x / BLOCK_SIZE;
 	game->minimap.player_map_y = game->player.y / BLOCK_SIZE;
-	game->minimap.map_start_y = game->minimap.player_map_y - \
-		(MINIMAP_VIEW_HEIGHT / 2);
-	game->minimap.map_start_x = game->minimap.player_map_x - \
-		(MINIMAP_VIEW_WIDTH / 2);
+	game->minimap.map_start_y = game->minimap.player_map_y
+		- (MINIMAP_VIEW_HEIGHT / 2);
+	game->minimap.map_start_x = game->minimap.player_map_x - (MINIMAP_VIEW_WIDTH
+			/ 2);
 	screen_pos.y = 0;
 	while (screen_pos.y < (MINIMAP_VIEW_HEIGHT * game->minimap.mini_block_size))
 	{

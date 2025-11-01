@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:42:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 17:43:29 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/11/01 17:14:39 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	free_struct(t_parse_map *data, char *menssage)
 		free_array(data->map);
 		data->map = NULL;
 	}
-	get_next_line(-1);
 	if (menssage)
 		printf("%s", menssage);
+	close_all();
 }
 
 void	free_list(t_list **head)

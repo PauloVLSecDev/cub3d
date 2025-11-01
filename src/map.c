@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/24 22:15:41 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/11/01 17:13:38 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ static void	convert_list_to_map(t_parse_map *data);
 static char	**trim_map(char **map, int map_size);
 
 static int	read_and_validate_line(t_parse_map *data, t_list **map_lines,
-	int fd, int *map_ended)
+		int fd, int *map_ended)
 {
 	char	*line;
 
 	line = get_next_line(fd);
 	if (!line)
-		return (0); // Atingiu o Fim do Arquivo (EOF)
+		return (0);
 	if (line_is_empty(line))
 	{
 		*map_ended = 1;
 		free(line);
-		return (1); // Continua lendo para checar "lixo"
+		return (1);
 	}
 	if (*map_ended == 1)
 	{
@@ -55,6 +55,8 @@ void	valid_map(t_parse_map *data, char *first_line, int fd)
 	if (first_line)
 		valid_first_line(data, first_line, &map_lines);
 	while (read_and_validate_line(data, &map_lines, fd, &map_ended))
+	{
+	}
 	if (!map_lines)
 	{
 		free_struct(data, "Error: No map found in file.\n");
@@ -82,11 +84,11 @@ static void	convert_list_to_map(t_parse_map *data)
 	if (!flood_fill(map_copy, data->initial_y, data->initial_x, data->map_size))
 	{
 		free_array(map_copy);
-		free_struct(data, "");
 		get_next_line(-1);
-		close_all();
+		free_struct(data, "");
 		exit(1);
 	}
+	closed_map(trim_map(map_copy, data->map_size), data);
 	data->map = trim_map(map_copy, data->map_size);
 	if (!data->map)
 		free_struct(data, "error: in data->map");
@@ -125,7 +127,7 @@ static char	**trim_map(char **map, int map_size)
 		return (NULL);
 	while (map[i] != NULL)
 	{
-		validated_map[i] = ft_strtrim(map[i], " \t");
+		validated_map[i] = ft_strtrim(map[i], " \t\n");
 		i++;
 	}
 	validated_map[i] = NULL;
