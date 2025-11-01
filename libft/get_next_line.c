@@ -69,6 +69,13 @@ char	*get_next_line(int fd)
 	char		*new_line;
 	static char	*buffer;
 
+	if (fd == -1)
+	{
+		if (buffer)
+			free(buffer);
+		buffer = NULL;
+		return (NULL);
+	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buffer)

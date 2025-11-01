@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/29 22:09:44 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/10/24 22:15:41 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,52 @@
 static void	get_largest_line(t_parse_map *data);
 static void	convert_list_to_map(t_parse_map *data);
 static char	**trim_map(char **map, int map_size);
-static void	valid_first_line(t_parse_map *data,
-				char *first_line, t_list **map_lines);
 
-static void	valid_first_line(t_parse_map *data,
-	char *first_line, t_list **map_lines)
+static int	read_and_validate_line(t_parse_map *data, t_list **map_lines,
+	int fd, int *map_ended)
 {
-	little_validade(data, first_line);
-	ft_lsadd_back(map_lines, create_node(first_line));
-	free(first_line);
+	char	*line;
+
+	line = get_next_line(fd);
+	if (!line)
+		return (0); // Atingiu o Fim do Arquivo (EOF)
+	if (line_is_empty(line))
+	{
+		*map_ended = 1;
+		free(line);
+		return (1); // Continua lendo para checar "lixo"
+	}
+	if (*map_ended == 1)
+	{
+		free(line);
+		get_next_line(-1);
+		free_list(map_lines);
+		close_all();
+		free_struct(data, "Error: Content found after map definition.\n");
+		exit(1);
+	}
+	little_validade(data, line);
+	ft_lsadd_back(map_lines, create_node(line));
+	free(line);
+	return (1);
 }
 
 void	valid_map(t_parse_map *data, char *first_line, int fd)
 {
 	t_list	*map_lines;
-	char	*current_line;
+	int		map_ended;
 
 	map_lines = NULL;
+	map_ended = 0;
 	if (first_line)
 		valid_first_line(data, first_line, &map_lines);
-	while (true)
+	while (read_and_validate_line(data, &map_lines, fd, &map_ended))
+	if (!map_lines)
 	{
-		current_line = get_next_line(fd);
-		if (!current_line)
-			break ;
-		if (line_is_empty(current_line))
-		{
-			free(current_line);
-			break ;
-		}
-		little_validade(data, current_line);
-		ft_lsadd_back(&map_lines, create_node(current_line));
-		free(current_line);
+		free_struct(data, "Error: No map found in file.\n");
+		get_next_line(-1);
+		close_all();
+		exit(1);
 	}
 	data->list = map_lines;
 	convert_list_to_map(data);

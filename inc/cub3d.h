@@ -200,5 +200,6 @@ void				map_size_list(t_parse_map *data);
 char				**duplicate_map(t_parse_map *data);
 void				free_textures(t_parse_map *data);
 void				close_all(void);
+void				valid_first_line(t_parse_map *data, char *first_line, t_list **map_lines);
 
 #endif
