@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 19:43:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/11/01 17:34:16 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/11/08 15:47:01 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	closed_map(char **map_copy, t_parse_map *data)
 			if (ft_strchr("0NSEW", map_copy[y][x]))
 			{
 				free_array(map_copy);
-				free_struct(data, "Error: Map contains unreachable regions\n");
+				free_struct(data, "Error: Map  unreachable regions\n");
 				get_next_line(-1);
 				close_all();
 				exit(1);
@@ -55,6 +55,15 @@ void	closed_map(char **map_copy, t_parse_map *data)
 		}
 		y++;
 	}
-	free_array(map_copy);
+	return ;
+}
+
+void	free_if_map_error(t_parse_map *data, char **map_copy)
+{
+	if (!map_copy)
+	{
+		free_struct(data, "");
+		exit(1);
+	}
 	return ;
 }

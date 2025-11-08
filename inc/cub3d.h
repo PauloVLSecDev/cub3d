@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:39:15 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/11/01 16:05:02 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/11/08 15:40:57 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,5 +203,6 @@ void				valid_first_line(t_parse_map *data, char *first_line,
 					t_list **map_lines);
 void				close_all(void);
 void				closed_map(char **map_copy, t_parse_map *data);
+void 				free_if_map_error(t_parse_map *data, char **map_copy);
 
 #endif
