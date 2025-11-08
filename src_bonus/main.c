@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 20:55:12 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/29 22:38:50 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/11/08 15:52:33 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-static void	init_main(int fd, char *filename, t_game game);
-
-static void	init_main(int fd, char *filename, t_game game)
+static void	init_main(int fd, char *filename, t_game *game)
 {
 	if (!extencion_map(filename))
 	{
@@ -26,12 +24,15 @@ static void	init_main(int fd, char *filename, t_game game)
 		printf("%s invalid file \n", filename);
 	else
 	{
-		init_data(&game.map_data);
-		game.map_data.file_path = filename;
-		if (parse_map_file(fd, &game.map_data) == 0)
-			init_win(&game);
+		init_data(&game->map_data);
+		game->map_data.file_path = filename;
+		if (parse_map_file(fd, &game->map_data) == 0)
+			init_win(game);
 		else
+		{
 			close(fd);
+			free_struct(&game->map_data, "");
+		}
 		get_next_line(-1);
 	}
 }
@@ -94,9 +95,7 @@ int	main(int argc, char *argv[])
 	fd = 0;
 	ft_bzero(&game, sizeof(t_game));
 	if (argc == 2)
-	{
-		init_main(fd, argv[1], game);
-	}
+		init_main(fd, argv[1], &game);
 	else
 		printf("Arguments Error: insert: maps/map_name.cub\n");
 	free_game_data(&game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:26:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/29 21:47:53 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/11/08 15:52:43 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"cub3d_bonus.h": "c",
+		"keycaps.h": "c",
+		"libft.h": "c"
+	}
+}

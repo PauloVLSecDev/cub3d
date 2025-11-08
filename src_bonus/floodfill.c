@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   floodfill.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:45:11 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/11/01 15:15:24 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/11/08 16:05:23 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/cub3d_bonus.h"
 

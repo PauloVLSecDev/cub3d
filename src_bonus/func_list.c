@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:42:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/29 21:47:32 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/11/08 15:52:25 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	free_struct(t_parse_map *data, char *menssage)
 		free_array(data->map);
 		data->map = NULL;
 	}
-	get_next_line(-1);
 	if (menssage)
 		printf("%s", menssage);
+	close_all();
 }
 
 void	free_list(t_list **head)

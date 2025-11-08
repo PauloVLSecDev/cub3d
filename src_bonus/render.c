@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:49:56 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/29 21:48:57 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/11/08 15:52:51 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

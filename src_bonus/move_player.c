@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:09:41 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/29 21:47:49 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/11/08 15:52:40 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

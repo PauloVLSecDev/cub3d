@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:39:15 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/29 21:56:11 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/11/08 16:00:37 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_BONUS_H
-# define CUB3D_BONUS_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -41,6 +41,7 @@ typedef struct s_minimap
 	int	map_start_x;
 	int	map_start_y;
 }		t_minimap;
+
 
 typedef struct s_point
 {
@@ -145,16 +146,15 @@ typedef struct s_game
 	int				map_height;
 	int				map_width;
 	t_player		player;
-	t_minimap		minimap;
 	char			**map;
 	int				floor_color;
 	int				ceiling_color;
+	t_minimap		minimap;
 	t_tex			textures[4];
 	t_parse_map		map_data;
 }					t_game;
 
 // --- Functions ---
-
 //minimap.c
 void				draw_minimap(t_game *game);
 void				draw_player_minimap(t_game *game);
@@ -196,6 +196,7 @@ void				parse_colors_f(char *rgb_str, t_parse_map *data);
 void				parse_colors_c(char *rgb_str, t_parse_map *data);
 void				parse_config_line(char *line, t_parse_map *data);
 void				valid_map(t_parse_map *data, char *first_line, int fd);
+int					validate_textures(t_game *game);
 
 // utils
 void				free_map(char **map);
@@ -206,8 +207,7 @@ void				find_player(char **map_copy, t_parse_map *data,
 						char *char_player);
 int					flood_fill(char **map_copy, int y, int x, int map_height);
 void				load_textures(t_game *game);
-int					validate_textures(t_game *game);
-int					validate_texture_extension(const char *filename);
+
 void				free_list(t_list **head);
 void				free_struct(t_parse_map *data, char *menssage);
 void				little_validade(t_parse_map *data, char *current_line);
@@ -216,9 +216,11 @@ t_list				*create_node(char *content);
 void				map_size_list(t_parse_map *data);
 char				**duplicate_map(t_parse_map *data);
 void				free_textures(t_parse_map *data);
+void				valid_first_line(t_parse_map *data, char *first_line,
+					t_list **map_lines);
 void				close_all(void);
-void				valid_first_line(t_parse_map *data, char *first_line, t_list **map_lines);
-
-
+void				closed_map(char **map_copy, t_parse_map *data);
+void 				free_if_map_error(t_parse_map *data, char **map_copy);
 
 #endif
+

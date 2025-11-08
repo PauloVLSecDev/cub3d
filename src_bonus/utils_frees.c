@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_frees.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 19:43:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/10/23 19:48:18 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/11/08 15:52:53 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,40 @@ void	valid_first_line(t_parse_map *data, char *first_line,
 	little_validade(data, first_line);
 	ft_lsadd_back(map_lines, create_node(first_line));
 	free(first_line);
+}
+
+void	closed_map(char **map_copy, t_parse_map *data)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (map_copy[y] != NULL)
+	{
+		x = 0;
+		while (map_copy[y][x] != '\0')
+		{
+			if (ft_strchr("0NSEW", map_copy[y][x]))
+			{
+				free_array(map_copy);
+				free_struct(data, "Error: Map  unreachable regions\n");
+				get_next_line(-1);
+				close_all();
+				exit(1);
+			}
+			x++;
+		}
+		y++;
+	}
+	return ;
+}
+
+void	free_if_map_error(t_parse_map *data, char **map_copy)
+{
+	if (!map_copy)
+	{
+		free_struct(data, "");
+		exit(1);
+	}
+	return ;
 }

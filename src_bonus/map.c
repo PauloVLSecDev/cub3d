@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/11/01 14:24:18 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/11/08 15:52:37 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,26 @@ void	valid_map(t_parse_map *data, char *first_line, int fd)
 static void	convert_list_to_map(t_parse_map *data)
 {
 	char	**map_copy;
+	char	**trimmed;
 
 	map_size_list(data);
 	get_largest_line(data);
 	map_copy = duplicate_map(data);
-	if (!map_copy)
-	{
-		free_struct(data, "");
-		exit(1);
-	}
+	free_if_map_error(data, map_copy);
 	find_player(map_copy, data, "NWES");
 	if (!flood_fill(map_copy, data->initial_y, data->initial_x, data->map_size))
 	{
 		free_array(map_copy);
-		free_struct(data, "");
 		get_next_line(-1);
-		close_all();
+		free_struct(data, "");
 		exit(1);
 	}
-	data->map = trim_map(map_copy, data->map_size);
+	trimmed = trim_map(map_copy, data->map_size);
+	free_array(map_copy);
+	closed_map(trimmed, data);
+	data->map = trimmed;
 	if (!data->map)
 		free_struct(data, "error: in data->map");
-	free_array(map_copy);
 	free_list(&data->list);
 	return ;
 }

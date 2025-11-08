@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:21:17 by yurivieirad       #+#    #+#             */
-/*   Updated: 2025/10/29 21:47:35 by yurivieirad      ###   ########.fr       */
+/*   Updated: 2025/11/08 15:52:28 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
