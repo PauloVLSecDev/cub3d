@@ -27,7 +27,7 @@ void	close_all(void)
 void	valid_first_line(t_parse_map *data, char *first_line,
 		t_list **map_lines)
 {
-	little_validade(data, first_line);
+	little_validade(data, first_line, map_lines);
 	ft_lsadd_back(map_lines, create_node(first_line));
 	free(first_line);
 }

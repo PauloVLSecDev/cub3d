@@ -39,7 +39,7 @@ static int	read_and_validate_line(t_parse_map *data, t_list **map_lines,
 		free_struct(data, "Error: Content found after map definition.\n");
 		exit(1);
 	}
-	little_validade(data, line);
+	little_validade(data, line, map_lines);
 	ft_lsadd_back(map_lines, create_node(line));
 	free(line);
 	return (1);
