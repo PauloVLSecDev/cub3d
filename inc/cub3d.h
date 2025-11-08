@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:39:15 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/11/08 15:40:57 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/11/08 17:46:25 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void				load_textures(t_game *game);
 
 void				free_list(t_list **head);
 void				free_struct(t_parse_map *data, char *menssage);
-void				little_validade(t_parse_map *data, char *current_line);
+void				little_validade(t_parse_map *data, char *current_line, t_list **map_lines);
 void				ft_lsadd_back(t_list **head, t_list *new);
 t_list				*create_node(char *content);
 void				map_size_list(t_parse_map *data);

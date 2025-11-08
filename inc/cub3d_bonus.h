@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:39:15 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/11/08 16:00:37 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/11/08 17:46:30 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ void				load_textures(t_game *game);
 
 void				free_list(t_list **head);
 void				free_struct(t_parse_map *data, char *menssage);
-void				little_validade(t_parse_map *data, char *current_line);
+void				little_validade(t_parse_map *data, char *current_line, t_list **map_lines);
 void				ft_lsadd_back(t_list **head, t_list *new);
 t_list				*create_node(char *content);
 void				map_size_list(t_parse_map *data);

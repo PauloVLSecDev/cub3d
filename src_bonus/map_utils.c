@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:58:08 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/11/08 15:52:35 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/11/08 17:44:17 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ void	map_size_list(t_parse_map *data)
 	data->map_size = map_size;
 }
 
-void	little_validade(t_parse_map *data, char *current_line)
+void	little_validade(t_parse_map *data, char *current_line,
+		t_list **map_lines)
 {
 	if (!is_valid_map_line(current_line))
 	{
-		free_list(&data->list);
-		free_struct(data, "line invalid");
+		if (map_lines && *map_lines)
+			free_list(map_lines);
+		free_struct(data, "line invalid\n");
 		free(current_line);
 		get_next_line(-1);
 		close_all();

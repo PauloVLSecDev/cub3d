@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 19:43:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/11/08 15:52:53 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/11/08 17:47:00 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	close_all(void)
 void	valid_first_line(t_parse_map *data, char *first_line,
 		t_list **map_lines)
 {
-	little_validade(data, first_line);
+	little_validade(data, first_line, map_lines);
 	ft_lsadd_back(map_lines, create_node(first_line));
 	free(first_line);
 }

@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "(gdb) Launch cub3d",
+      "type": "cppdbg",
+      "request": "launch",
+      // Caminho para o seu executável
+      "program": "${workspaceFolder}/cub3d",
+      "args": [
+        // Argumento (mapa) a ser passado para o programa
+        "maps/map.cub"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      // Diz ao VS Code para executar a tarefa "make build" antes de depurar
+      "preLaunchTask": "C/C++: make build"
+    }
+  ]
+}

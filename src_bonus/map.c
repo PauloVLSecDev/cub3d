@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:50 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/11/08 15:52:37 by yvieira-         ###   ########.fr       */
+/*   Updated: 2025/11/08 17:47:04 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	read_and_validate_line(t_parse_map *data, t_list **map_lines,
 		free_struct(data, "Error: Content found after map definition.\n");
 		exit(1);
 	}
-	little_validade(data, line);
+	little_validade(data, line, map_lines);
 	ft_lsadd_back(map_lines, create_node(line));
 	free(line);
 	return (1);

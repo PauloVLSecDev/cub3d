@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "C/C++: make build",
+      "type": "shell",
+      // O comando para construir seu projeto
+      "command": "make",
+      "args": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        // Torna esta a tarefa de build padrão (Ctrl+Shift+B)
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
